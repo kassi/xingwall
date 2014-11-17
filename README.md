@@ -53,7 +53,13 @@ XING_CONSUMER_KEY="xxxxxxxxxx"
 XING_CONSUMER_SECRET="yyyyyyyyyyyyyy"
 ```
 
-Use `grunt` for development. Make sure mongodb is runnig.
+Best you install grunt globally to avoid having to run `grunt` by specifying the whole path.
+
+```
+$ npm install -g grunt-cli
+```
+
+Make sure mongodb is runnig and run `grunt`
 
 ```
 $ grunt
