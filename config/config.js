@@ -1,6 +1,6 @@
-var path = require('path'),
+var path     = require('path'),
     rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development';
+    env      = process.env.NODE_ENV || 'development';
 
 var config = {
   development: {
@@ -9,8 +9,12 @@ var config = {
       name: 'xingwall'
     },
     port: 3000,
-    db: 'mongodb://localhost/xingwall-development'
-    
+    db: 'mongodb://localhost/xingwall-development',
+    xingApi: {
+      consumerKey: process.env.XING_CONSUMER_KEY,
+      consumerSecret: process.env.XING_CONSUMER_SECRET,
+      oauthCallback: 'http://localhost:3000/oauth_callback'
+    }
   },
 
   test: {
@@ -19,8 +23,12 @@ var config = {
       name: 'xingwall'
     },
     port: 3000,
-    db: 'mongodb://localhost/xingwall-test'
-    
+    db: 'mongodb://localhost/xingwall-test',
+    xingApi: {
+      consumerKey: process.env.XING_CONSUMER_KEY,
+      consumerSecret: process.env.XING_CONSUMER_SECRET,
+      oauthCallback: 'http://SETMEINCONFIG'
+    }
   },
 
   production: {
@@ -29,8 +37,12 @@ var config = {
       name: 'xingwall'
     },
     port: 3000,
-    db: 'mongodb://localhost/xingwall-production'
-    
+    db: 'mongodb://localhost/xingwall-production',
+    xingApi: {
+      consumerKey: process.env.XING_CONSUMER_KEY,
+      consumerSecret: process.env.XING_CONSUMER_SECRET,
+      oauthCallback: 'http://SETMEINCONFIG'
+    }
   }
 };
 

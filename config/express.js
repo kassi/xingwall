@@ -18,7 +18,7 @@ module.exports = function(app, config) {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
-  app.use(cookieParser());
+  app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
