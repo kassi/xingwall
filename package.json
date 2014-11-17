@@ -19,6 +19,7 @@
     "jade": "~1.3.0"
   },
   "devDependencies": {
+    "dotenv": "~0.4.0",
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
     "grunt-develop": "~0.4.0",
