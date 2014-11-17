@@ -1,4 +1,6 @@
-require('dotenv').load();
+if (process.env.NODE_ENV === "development") {
+  require('dotenv').load();
+};
 
 var express  = require('express'),
     config   = require('./config/config'),
