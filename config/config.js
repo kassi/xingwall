@@ -41,7 +41,7 @@ var config = {
     xingApi: {
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
-      oauthCallback: 'http://SETMEINCONFIG'
+      oauthCallback: process.env.OAUTH_CALLBACK
     }
   }
 };
