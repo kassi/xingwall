@@ -81,8 +81,8 @@ Before you can start using Heroku you have to install the [heroku toolbelt](http
 
 ## Setup a new Heroku app
 
-For a new Heroku application you have to add [Compose MongoDB](https://addons.heroku.com/mongohq) plugin and add the
-necessary config variables.
+If you create a new Heroku application you have to add the [Compose MongoDB](https://addons.heroku.com/mongohq) addon
+and add the necessary config variables.
 
 ```
 heroku config:set NODE_ENV=production
