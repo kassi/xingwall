@@ -40,6 +40,7 @@ $ npm link
 ```
 $ git clone https://github.com/kassi/xingwall.git
 $ cd xingwall
+$ npm link xing-xpi
 $ npm install
 ```
 
