@@ -19,7 +19,8 @@
     "method-override": "~2.1.1",
     "glob": "~4.0.5",
     "mongoose": "~3.8.12",
-    "jade": "~1.3.0"
+    "jade": "~1.3.0",
+    "xing-api": "git://github.com/volkert/xing-api-nodejs#master"
   },
   "devDependencies": {
     "dotenv": "~0.4.0",
