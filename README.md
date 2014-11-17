@@ -3,7 +3,61 @@ xingwall
 
 Amazing Wall of Xing members logged in to a service.
 
-Work in Progress.
+This is currently work in progress!
+
+## Prerequisites
+
+### MongoDB
+
+#### Mac OS X
+
+```
+$ brew install mongodb
+$ mongod
+```
+
+### Node
+
+### Mac OS X
+
+```
+$ brew install node
+```
+
+### xing-api-nodejs
+
+The current work-in-progress state makes use of [xing-api-nodejs](https://github.com/volkert/xing-api-nodejs).
+As long as this is also work-in-progress and not pushed to npm, you need to install it manually
+
+```
+$ git clone https://github.com/volkert/xing-api-nodejs
+$ cd xing-api-nodejs
+$ npm link
+```
+
+## Installation
+
+```
+$ git clone https://github.com/kassi/xingwall.git
+$ cd xingwall
+$ npm install
+```
+
+## Development
+
+Use `grunt` for development. Make sure mongodb is runnig.
+
+```
+$ grunt
+```
+
+## Usage
+
+Run it in production mode
+
+```
+$ npm start
+```
 
 ## Authors
 
