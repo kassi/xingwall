@@ -3,7 +3,9 @@ var express = require('express'),
     XINGApi = require('xing-api'),
     Profile = require('mongoose').model('Profile'),
     xingApi = new XINGApi(config.xingApi),
-    router  = express.Router();
+    router  = express.Router(),
+    crypto  = require('crypto'),
+    Wall    = require('mongoose').model('Wall');
 
 module.exports = function (app) {
   app.use('/', router);
@@ -14,7 +16,36 @@ router.get('/', function (req, res, next) {
     if (err) {
       console.err(err);
     }
-    res.render('index', { profiles: profiles });
+    Wall.find(function (err, walls) {
+      if (err) {
+        console.err(err);
+      }
+      res.render('index', {walls: walls, profiles: profiles});
+    });
+  });
+});
+
+router.post('/walls', function (req, res, next) {
+  var wall = new Wall({});
+  wall.save(function (err) {
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    } else {
+      res.redirect('/walls/' + wall._id);
+    }
+  });
+});
+
+router.get('/walls/:wall_id', function (req, res, next) {
+  var wall_id = req.params.wall_id;
+  Wall.findById(wall_id, function (err, found) {
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    } else {
+      res.render('wall', {wall_id: wall_id});
+    }
   });
 });
 
