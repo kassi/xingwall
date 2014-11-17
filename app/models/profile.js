@@ -1,9 +1,10 @@
 // Example model
 
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+    Schema   = mongoose.Schema;
 
 var ProfileSchema = new Schema({
+  _id: String,
   displayName: String,
   photoUrls: {
     size_64x64: String,
