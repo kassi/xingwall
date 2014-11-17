@@ -1,4 +1,10 @@
 extends layout
 
 block content
+
+  ul.profiles
+    - each profile in profiles
+      li
+        = profile.displayName
+
   a(href='/connect') Connect with XING

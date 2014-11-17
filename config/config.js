@@ -13,7 +13,7 @@ var config = {
     xingApi: {
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
-      oauthCallback: 'http://localhost:3000/oauth_callback'
+      oauthCallback: process.env.OAUTH_CALLBACK
     }
   },
 
@@ -27,7 +27,7 @@ var config = {
     xingApi: {
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
-      oauthCallback: 'http://SETMEINCONFIG'
+      oauthCallback: process.env.OAUTH_CALLBACK
     }
   },
 
