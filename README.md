@@ -46,7 +46,7 @@ $ npm install
 
 ## Development
 
-Add your xing api consumer key and secret to a loacl .env file
+Add your xing api consumer key and secret to a local .env file
 
 ```
 XING_CONSUMER_KEY="xxxxxxxxxx"
