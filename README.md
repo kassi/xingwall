@@ -46,6 +46,13 @@ $ npm install
 
 ## Development
 
+Add your xing api consumer key and secret to a loacl .env file
+
+```
+XING_CONSUMER_KEY="xxxxxxxxxx"
+XING_CONSUMER_SECRET="yyyyyyyyyyyyyy"
+```
+
 Use `grunt` for development. Make sure mongodb is runnig.
 
 ```
