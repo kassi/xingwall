@@ -3,3 +3,4 @@ public/components
 .sass-cache
 .idea
 .env
+npm-debug.log
