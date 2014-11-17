@@ -36,7 +36,7 @@ var config = {
     app: {
       name: 'xingwall'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     db: process.env.MONGOHQ_URL,
     xingApi: {
       consumerKey: process.env.XING_CONSUMER_KEY,
