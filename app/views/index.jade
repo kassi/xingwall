@@ -9,9 +9,10 @@ block content
 
   a(href='/connect') Connect with XING
 
-  ul
-  each wall in walls
-    li
-      a(href='/walls/'+ wall._id) #{wall._id}
+  ul.walls
+    each wall in walls
+      li
+        a(href='/walls/'+ wall._id) #{wall._id}
+
   form(method='post', action='/walls')
     input(type='submit', value='Create a new wall')
