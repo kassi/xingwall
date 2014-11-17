@@ -73,6 +73,37 @@ Run it in production mode
 $ npm start
 ```
 
+# Deployment
+
+You can deploy this application to Heroku.
+
+Before you can start using Heroku you have to install the [heroku toolbelt](https://toolbelt.heroku.com/).
+
+## Setup a new Heroku app
+
+For a new Heroku application you have to add [Compose MongoDB](https://addons.heroku.com/mongohq) plugin and add the
+necessary config variables.
+
+```
+heroku config:set NODE_ENV=production
+heroku config:set COOKIE_SECRET=aRandomCookieSecret
+heroku config:set XING_CONSUMER_KEY=yourConsumerKey
+heroku config:set XING_CONSUMER_SECRET=yourConsumerSecret
+```
+
+## Deploy to Heroku
+
+If you're deploying for the first time you have to remember to login and setup the `heroku` remote:
+
+1. `heroku login`
+2. `heroku git:remote -a YOUR_APP_NAME`
+
+After that you can deploy using the usual git push:
+
+```
+git push heroku master
+```
+
 ## Authors
 
 * Jan Ahrens
