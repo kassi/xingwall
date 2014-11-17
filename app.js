@@ -18,7 +18,14 @@ models.forEach(function (model) {
   require(model);
 });
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
-require('./config/express')(app, config);
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
 
-app.listen(config.port);
+require('./config/express')(app, config, io);
+
+
+http.listen(config.port);
