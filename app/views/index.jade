@@ -1,5 +1,14 @@
 extends layout
 
+block js
+  script(src='/socket.io/socket.io.js')
+  script.
+    var socket = io();
+
+    socket.on('profile:updated', function(msg){
+      console.log('received:', msg)
+    });
+
 block content
 
   ul.profiles

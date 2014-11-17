@@ -78,14 +78,18 @@ module.exports = function (app, io) {
 
             delete profile._id;
 
-            Profile.update({ _id: user.id }, profile, { upsert: true }, function (err) {
+            Profile.update({ _id: user.id }, profile, { upsert: true }, function (err, rows, raw) {
               if (err) {
                 console.error(err);
               }
 
-              io.emit('profile:updated', { profile: profile });
+              Profile.findOne({ _id: user.id }, function (err, _profile) {
+                console.log('_profile', _profile);
+                io.emit('profile:updated', { profile: _profile });
 
-              res.redirect('/');
+                res.redirect('/');
+              });
+
             });
           });
         });
