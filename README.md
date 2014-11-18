@@ -46,12 +46,7 @@ $ npm install
 
 ## Development
 
-Add your xing api consumer key and secret to a local .env file
-
-```
-XING_CONSUMER_KEY="xxxxxxxxxx"
-XING_CONSUMER_SECRET="yyyyyyyyyyyyyy"
-```
+Copy `.env.example` to `.env` and set the environment variables to fit your development environment.
 
 Best you install grunt globally to avoid having to run `grunt` by specifying the whole path.
 
