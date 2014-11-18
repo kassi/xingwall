@@ -1,8 +1,9 @@
 var config  = require('../../config/config'),
     XINGApi = require('xing-api'),
-    Profile = require('mongoose').model('Profile'),
-    xingApi = new XINGApi(config.xingApi),
-    Wall    = require('mongoose').model('Wall');
+    mongoose = require('mongoose'),
+    Profile = mongoose.model('Profile'),
+    Wall    = mongoose.model('Wall'),
+    xingApi = new XINGApi(config.xingApi);
 
 module.exports = function (app, io) {
   app.get('/', function (req, res, next) {
@@ -16,30 +17,6 @@ module.exports = function (app, io) {
         }
         res.render('index', { walls: walls, profiles: profiles });
       });
-    });
-  });
-
-  app.post('/walls', function (req, res, next) {
-    var wall = new Wall({});
-    wall.save(function (err) {
-      if (err) {
-        console.log(err);
-        res.redirect('/');
-      } else {
-        res.redirect('/walls/' + wall._id);
-      }
-    });
-  });
-
-  app.get('/walls/:wall_id', function (req, res, next) {
-    var wall_id = req.params.wall_id;
-    Wall.findById(wall_id, function (err, found) {
-      if (err) {
-        console.log(err);
-        res.redirect('/');
-      } else {
-        res.render('wall', { wall_id: wall_id });
-      }
     });
   });
 
