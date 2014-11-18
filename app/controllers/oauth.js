@@ -1,22 +1,17 @@
-var config  = require('../../config/config'),
-    XINGApi = require('xing-api'),
+var config   = require('../../config/config'),
+    XINGApi  = require('xing-api'),
     mongoose = require('mongoose'),
-    Profile = mongoose.model('Profile'),
-    Wall    = mongoose.model('Wall'),
-    xingApi = new XINGApi(config.xingApi);
+    Profile  = mongoose.model('Profile'),
+    Wall     = mongoose.model('Wall'),
+    xingApi  = new XINGApi(config.xingApi);
 
 module.exports = function (app, io) {
   app.get('/', function (req, res, next) {
-    Profile.find(function (err, profiles) {
+    Wall.find(function (err, walls) {
       if (err) {
         console.err(err);
       }
-      Wall.find(function (err, walls) {
-        if (err) {
-          console.err(err);
-        }
-        res.render('index', { walls: walls, profiles: profiles });
-      });
+      res.render('index', { walls: walls });
     });
   });
 
