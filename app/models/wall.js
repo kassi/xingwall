@@ -7,7 +7,7 @@ var WallSchema = new Schema({
       _id: String,
       displayName: String,
       photoUrls: {
-        size_64x64: String,
+        size_128x128: String,
         size_256x256: String
       }
     }

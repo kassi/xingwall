@@ -1,0 +1,25 @@
+.btn {
+  background: $col-primary;
+  color: $col-white;
+  border: 1px solid $col-primary-shade;
+  border-radius: $radius;
+  text-align: center;
+  padding: $space $space-double;
+  font-size: $font-m;
+  outline: none;
+  word-spacing: 2px;
+
+  &:hover {
+    background: $col-primary-shade;
+    cursor: pointer;
+  }
+
+  &:focus {
+    text-shadow: rgba(255,255,255,0.4) 0 0 4px;
+  }
+}
+
+.btn.action {
+  font-size: $font-xl;
+  padding: $space-double $space-double*2;
+}

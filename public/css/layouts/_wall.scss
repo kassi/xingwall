@@ -1,0 +1,73 @@
+$_detail_width: 40%;
+$_wall_height: 85%;
+
+.wall {
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+.wall-section {
+  position: absolute;
+  top: 0;
+  bottom: 100 - $_wall_height;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wall-profiles {
+  left: 0;
+  right: $_detail_width;
+  list-style-type: none;
+}
+
+.wall-profile-entry {
+  float: left;
+  width: 128px;
+  height: 128px;
+  opacity: 0.7;
+  border: 1px solid $col-white;
+  transition: opacity 0.5s;
+
+  &.active, &:hover {
+    opacity: 1;
+  }
+}
+
+.wall-details {
+  right: 0;
+  left: 100 - $_detail_width;
+  background: #eee url('/img/pattern.png');
+  box-shadow: inset 2px 0 3px rgba(0,0,0,0.1);
+
+  h1 {
+    text-align: center;
+    font-size: $font-headline;
+    margin: $space-quad 0;
+  }
+
+  .profile-photo {
+    display: block;
+    margin: $space-quad auto;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  }
+}
+
+.wall-actions {
+  top: $_wall_height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.1);
+  text-align: center;
+
+  .wall-actions-shell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

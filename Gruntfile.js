@@ -26,7 +26,7 @@ module.exports = function (grunt) {
     },
     watch: {
       options: {
-        nospawn: true,
+        nospawn: false,
         livereload: reloadPort
       },
       js: {
@@ -37,11 +37,18 @@ module.exports = function (grunt) {
         ],
         tasks: ['develop', 'delayed-livereload']
       },
-      css: {
+      sass: {
         files: [
-          'public/css/*.scss'
+          'public/css/**/*.scss'
         ],
         tasks: ['sass'],
+        options: {
+          livereload: false
+        }
+      },
+      css: {
+        files: ['public/css/style.css'],
+        tasks: [],
         options: {
           livereload: reloadPort
         }
@@ -76,7 +83,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'sass',
-    'develop', 
+    'develop',
     'watch'
   ]);
 };

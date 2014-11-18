@@ -55,7 +55,7 @@ module.exports = function (app, io) {
                 _id: user.id,
                 displayName: user.display_name,
                 photoUrls: {
-                  size_64x64: user.photo_urls.size_64x64,
+                  size_128x128: user.photo_urls.size_128x128,
                   size_256x256: user.photo_urls.size_256x256
                 }
               });

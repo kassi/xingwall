@@ -1,0 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
+$font-family: Lato, sans-serif;
+
+// http://modularscale.com/scale/?px1=14&px2=18&ra1=1.618&ra2=0
+$font-s: 11.125px;
+$font-m: 14px;
+$font-l: 18px;
+$font-xl: 22.652px;
+$font-headline: 42px;
+
+$col-white: #fff;
+$col-black: #222;
+$col-primary: #006567;
+$col-primary-shade: darken($col-primary, 5%);
+$col-secondary: #CFDC00;
+
+$space: 10px;
+$space-half: $space / 2;
+$space-double: $space * 2;
+$space-quad: $space-double * 2;
+
+$radius: 4px;
+

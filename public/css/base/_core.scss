@@ -1,0 +1,10 @@
+body {
+  font-size: $font-m;
+  font-family: $font-family;
+  background: $col-white;
+  color: $col-black;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
