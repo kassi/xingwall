@@ -22,6 +22,11 @@ module.exports = function (app, config, io) {
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
 
+  var models = glob.sync(config.root + '/app/models/*.js');
+  models.forEach(function (model) {
+    require(model);
+  });
+
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
     require(controller)(app, io);
