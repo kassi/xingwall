@@ -24,7 +24,7 @@ angular.module('xingwall', [])
           }.bind(this));
         };
 
-        socket.on('profiles:updated', function() {
+        socket.on('profiles:updated', function () {
           this.loadData();
         }.bind(this));
 

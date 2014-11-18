@@ -1,9 +1,12 @@
-var config   = require('../../config/config'),
-    XINGApi  = require('xing-api'),
+var XINGApi  = require('xing-api'),
     mongoose = require('mongoose'),
     Profile  = mongoose.model('Profile'),
     Wall     = mongoose.model('Wall'),
-    xingApi  = new XINGApi(config.xingApi);
+    xingApi  = new XINGApi({
+      consumerKey: process.env.XING_CONSUMER_KEY,
+      consumerSecret: process.env.XING_CONSUMER_SECRET,
+      oauthCallback: process.env.OAUTH_CALLBACK
+    });
 
 module.exports = function (app, io) {
   app.get('/', function (req, res) {

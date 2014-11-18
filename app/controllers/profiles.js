@@ -9,6 +9,6 @@ module.exports = function (app, io) {
         }, function (err) {
           console.error(err);
         });
-    })
+    });
   });
 };

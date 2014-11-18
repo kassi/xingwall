@@ -3,17 +3,16 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
 }
 
 var app      = require('express')(),
-    config   = require('./config/config'),
     mongoose = require('mongoose'),
     http     = require('http').Server(app),
     io       = require('socket.io')(http);
 
-mongoose.connect(config.db);
+mongoose.connect(process.env.MONGOHQ_URL);
 var db = mongoose.connection;
 db.on('error', function () {
   throw new Error('unable to connect to database at ' + config.db);
 });
 
-require('./config/express')(app, config, io);
+require('./config/express')(app, io);
 
-http.listen(config.port);
+http.listen(process.env.PORT || 3000);

@@ -5,13 +5,14 @@ var express        = require('express'),
     cookieParser   = require('cookie-parser'),
     bodyParser     = require('body-parser'),
     compress       = require('compression'),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override'),
+    root           = require('path').normalize(__dirname + '/..');
 
-module.exports = function (app, config, io) {
-  app.set('views', config.root + '/app/views');
+module.exports = function (app, io) {
+  app.set('views', root + '/app/views');
   app.set('view engine', 'jade');
 
-  //app.use(favicon(config.root + '/public/img/favicon.ico'));
+  //app.use(favicon(root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
@@ -19,15 +20,15 @@ module.exports = function (app, config, io) {
   }));
   app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(compress());
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static(root + '/public'));
   app.use(methodOverride());
 
-  var models = glob.sync(config.root + '/app/models/*.js');
+  var models = glob.sync(root + '/app/models/*.js');
   models.forEach(function (model) {
     require(model);
   });
 
-  var controllers = glob.sync(config.root + '/app/controllers/*.js');
+  var controllers = glob.sync(root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
     require(controller)(app, io);
   });
