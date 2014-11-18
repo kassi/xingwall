@@ -1,6 +1,6 @@
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   require('dotenv').load();
-};
+}
 
 var express  = require('express'),
     config   = require('./config/config'),
@@ -21,7 +21,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
   console.log('a user connected');
 });
 

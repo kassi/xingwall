@@ -1,5 +1,3 @@
-// Example model
-
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema;
 
@@ -11,10 +9,5 @@ var ProfileSchema = new Schema({
     size_256x256: String
   }
 });
-
-//ArticleSchema.virtual('date')
-//  .get(function(){
-//    return this._id.getTimestamp();
-//  });
 
 mongoose.model('Profile', ProfileSchema);
