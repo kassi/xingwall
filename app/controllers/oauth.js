@@ -6,16 +6,16 @@ var config   = require('../../config/config'),
     xingApi  = new XINGApi(config.xingApi);
 
 module.exports = function (app, io) {
-  app.get('/', function (req, res, next) {
-    Wall.find(function (err, walls) {
-      if (err) {
-        console.err(err);
-      }
-      res.render('index', { walls: walls });
-    });
+  app.get('/', function (req, res) {
+    Wall.find().exec()
+      .then(function (walls) {
+        res.render('index', { walls: walls });
+      }, function (err) {
+        console.error(err);
+      });
   });
 
-  app.get('/connect', function (req, res, next) {
+  app.get('/connect', function (req, res) {
     xingApi.getRequestToken(function (oauthToken, oauthTokenSecret, authorizeUrl) {
       res.cookie('requestToken',
         JSON.stringify({ token: oauthToken, secret: oauthTokenSecret }),
@@ -25,7 +25,7 @@ module.exports = function (app, io) {
     });
   });
 
-  app.get('/oauth_callback', function (req, res, next) {
+  app.get('/oauth_callback', function (req, res) {
     var requestToken = JSON.parse(req.signedCookies.requestToken);
 
     xingApi.getAccessToken(requestToken.token, requestToken.secret, req.query.oauth_verifier,
@@ -47,19 +47,14 @@ module.exports = function (app, io) {
 
           delete profile._id;
 
-          Profile.update({ _id: user.id }, profile, { upsert: true }, function (err, rows, raw) {
-            if (err) {
-              console.error(err);
-            }
-
-            Profile.findOne({ _id: user.id }, function (err, _profile) {
-              console.log('_profile', _profile);
-              io.emit('profiles:updated', { profile: _profile });
+          Profile.update({ _id: user.id }, profile, { upsert: true }).exec()
+            .then(function () {
+              io.emit('profiles:updated');
 
               res.render('oauth/callback');
+            }, function (err) {
+              console.error(err);
             });
-
-          });
         });
       });
   });

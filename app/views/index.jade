@@ -15,13 +15,13 @@ block content
 
     button(ng-click='wall.openPopup()') Connect with XING
 
-    //ul.walls
-    //  each wall in walls
-    //    li
-    //      a(href='/walls/'+ wall._id) #{wall._id}
-    //
-    //form(method='post', action='/walls')
-    //  input(type='submit', value='Create a new wall')
+    ul.walls
+      each wall in walls
+        li
+          a(href='/walls/'+ wall._id) #{wall._id}
+
+    form(method='post', action='/walls')
+      input(type='submit', value='Create a new wall')
 
 block footer_js
   script(src='/js/client.js')
