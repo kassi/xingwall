@@ -59,9 +59,9 @@ module.exports = function (app, io) {
 
             Profile.findOne({ _id: user.id }, function (err, _profile) {
               console.log('_profile', _profile);
-              io.emit('profile:updated', { profile: _profile });
+              io.emit('profiles:updated', { profile: _profile });
 
-              res.redirect('/');
+              res.render('oauth/callback');
             });
 
           });
