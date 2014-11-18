@@ -8,13 +8,6 @@ block js
 
 block content
   div(ng-app='xingwall' xingwall)
-
-    ul
-      li(ng-repeat='profile in wall.profiles').
-        {{profile.displayName}}
-
-    button(ng-click='wall.openPopup()') Connect with XING
-
     ul.walls
       each wall in walls
         li

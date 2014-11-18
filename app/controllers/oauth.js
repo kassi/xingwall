@@ -1,6 +1,5 @@
 var XINGApi  = require('xing-api'),
     mongoose = require('mongoose'),
-    Profile  = mongoose.model('Profile'),
     Wall     = mongoose.model('Wall'),
     xingApi  = new XINGApi({
       consumerKey: process.env.XING_CONSUMER_KEY,
@@ -18,7 +17,11 @@ module.exports = function (app, io) {
       });
   });
 
-  app.get('/connect', function (req, res) {
+  app.get('/connect/:wall_id', function (req, res) {
+    // XXX ugly hack
+    var existingAuthorizeCallback = xingApi.oauth._authorize_callback;
+    xingApi.oauth._authorize_callback = existingAuthorizeCallback + '?wall_id=' + req.params.wall_id;
+
     xingApi.getRequestToken(function (oauthToken, oauthTokenSecret, authorizeUrl) {
       res.cookie('requestToken',
         JSON.stringify({ token: oauthToken, secret: oauthTokenSecret }),
@@ -26,6 +29,9 @@ module.exports = function (app, io) {
 
       res.redirect(authorizeUrl);
     });
+
+    // XXX ugly hack
+    xingApi.oauth._authorize_callback = existingAuthorizeCallback;
   });
 
   app.get('/oauth_callback', function (req, res) {
@@ -40,23 +46,27 @@ module.exports = function (app, io) {
         client.get('/v1/users/me', function (error, response) {
           var user = JSON.parse(response).users[0];
 
-          var profile = new Profile({
-            displayName: user.display_name,
-            photoUrls: {
-              size_64x64: user.photo_urls.size_64x64,
-              size_256x256: user.photo_urls.size_256x256
-            }
-          }).toObject();
+          Wall.findOne({ _id: req.query.wall_id }).exec()
+            .then(function (wall) {
+              // remove use if already there
+              wall.profiles.pull({_id: user.id });
 
-          delete profile._id;
-
-          Profile.update({ _id: user.id }, profile, { upsert: true }).exec()
-            .then(function () {
-              io.emit('profiles:updated');
-
-              res.render('oauth/callback');
-            }, function (err) {
-              console.error(err);
+              wall.profiles.push({
+                _id: user.id,
+                displayName: user.display_name,
+                photoUrls: {
+                  size_64x64: user.photo_urls.size_64x64,
+                  size_256x256: user.photo_urls.size_256x256
+                }
+              });
+              wall.save(function (err) {
+                if(err) {
+                  console.error(err);
+                } else {
+                  io.emit('profiles:updated');
+                  res.render('oauth/callback');
+                }
+              });
             });
         });
       });

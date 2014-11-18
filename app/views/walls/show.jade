@@ -1,6 +1,20 @@
 extends ../layout
 
-block content
-  p= wall_id
+block js
+  script(src='/components/angular/angular.min.js')
+  script(src='/socket.io/socket.io.js')
+  script.
+    var socket = io();
 
-  a(href='/') Back to Start
+block content
+  div(ng-app='xingwall' xingwall=wall_id)
+    h1.
+      #{wall_id}
+    ul
+      li(ng-repeat='profile in profiles').
+        {{profile.displayName}}
+
+    button(ng-click='openPopup()') Connect with XING
+
+block footer_js
+  script(src='/js/client.js')

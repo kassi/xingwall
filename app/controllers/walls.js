@@ -15,12 +15,12 @@ module.exports = function (app, io) {
 
   app.get('/walls/:wall_id', function (req, res, next) {
     var wall_id = req.params.wall_id;
-    Wall.findById(wall_id, function (err, found) {
+    Wall.findById(wall_id, function (err, wall) {
       if (err) {
         console.log(err);
         res.redirect('/');
       } else {
-        res.render('walls/show', { wall_id: wall_id });
+        res.render('walls/show', { wall_id: wall.id });
       }
     });
   });
