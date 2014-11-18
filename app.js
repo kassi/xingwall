@@ -10,7 +10,7 @@ var app      = require('express')(),
 mongoose.connect(process.env.MONGOHQ_URL);
 var db = mongoose.connection;
 db.on('error', function () {
-  throw new Error('unable to connect to database at ' + config.db);
+  throw new Error('unable to connect to database at ' + process.env.MONGOHQ_URL);
 });
 
 require('./config/express')(app, io);
