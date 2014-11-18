@@ -7,7 +7,7 @@ var express        = require('express'),
     compress       = require('compression'),
     methodOverride = require('method-override');
 
-module.exports = function (app, config, io, socket) {
+module.exports = function (app, config, io) {
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
 
@@ -24,7 +24,7 @@ module.exports = function (app, config, io, socket) {
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
-    require(controller)(app, io, socket);
+    require(controller)(app, io);
   });
 
   app.use(function (req, res, next) {
