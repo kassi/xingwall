@@ -1,6 +1,6 @@
 var Wall = require('mongoose').model('Wall');
 
-module.exports = function (app) {
+module.exports = function (app, io) {
   app.post('/walls', function (req, res) {
     var wall = new Wall({ name: req.body.name });
     wall.save(function (err) {
@@ -32,6 +32,7 @@ module.exports = function (app) {
         wall.profiles.pull(req.body.profile_id);
 
         wall.save(function () {
+          io.emit('profiles:updated');
           res.redirect('/');
         });
       }, function (err) {
