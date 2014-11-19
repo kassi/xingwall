@@ -35,10 +35,6 @@ angular.module('xingwall', [])
           $scope.currentProfile.isActive = true;
         };
 
-        $scope.openPopup = function () {
-          window.open('/connect/' + $scope.wallId, 'Connect to XING', 'width=600, height=400')
-        };
-
         socket.on('profiles:updated', function () {
           $scope.loadData();
         });

@@ -1,6 +1,7 @@
 extends ../layout
 
 block js
+  script(src='/components/jquery/dist/jquery.min.js')
   script(src='/components/angular/angular.min.js')
   script(src='/socket.io/socket.io.js')
   script(src='/js/vendor/qrcode.js')
@@ -24,8 +25,7 @@ block content
       h1= "{{currentProfile.displayName}}"
       img.profile-photo(ng-src="{{currentProfile.photoUrls.size_256x256}}")
 
-      //button.btn.action(ng-click='openPopup()') Connect with XING
-
 block footer_js
+  script(src='/js/grid.js')
   script(src='/js/client.js')
   script(src='/js/qr.js')

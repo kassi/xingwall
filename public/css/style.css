@@ -45,15 +45,13 @@ body {
   clear: both; }
 
 .wall-section {
-  position: absolute;
-  top: 0;
-  bottom: 0%;
+  float: left;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto; }
 
 .wall-profiles {
-  left: 0;
-  right: 40%;
+  width: 70%;
   list-style-type: none; }
 
 .wall-profile-entry {
@@ -67,8 +65,7 @@ body {
     opacity: 1; }
 
 .wall-details {
-  right: 0;
-  left: 60%;
+  width: 30%;
   background: #eee url('/img/pattern.png');
   box-shadow: inset 2px 0 3px rgba(0, 0, 0, 0.1); }
   .wall-details h1 {

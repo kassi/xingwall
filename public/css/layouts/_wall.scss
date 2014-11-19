@@ -1,5 +1,4 @@
-$_detail_width: 40%;
-$_wall_height: 100%;
+$_detail_width: 30%;
 
 .wall {
   &:after {
@@ -10,16 +9,14 @@ $_wall_height: 100%;
 }
 
 .wall-section {
-  position: absolute;
-  top: 0;
-  bottom: 100 - $_wall_height;
+  float: left;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .wall-profiles {
-  left: 0;
-  right: $_detail_width;
+  width: 100 - $_detail_width;
   list-style-type: none;
 }
 
@@ -37,8 +34,7 @@ $_wall_height: 100%;
 }
 
 .wall-details {
-  right: 0;
-  left: 100 - $_detail_width;
+  width: $_detail_width;
   background: #eee url('/img/pattern.png');
   box-shadow: inset 2px 0 3px rgba(0,0,0,0.1);
 
