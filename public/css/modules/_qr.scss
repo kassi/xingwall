@@ -1,0 +1,9 @@
+$_qr_offset: 20px;
+
+#qr {
+  position: absolute;
+  bottom: $_qr_offset;
+  right: $_qr_offset;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}

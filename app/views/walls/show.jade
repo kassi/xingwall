@@ -3,11 +3,13 @@ extends ../layout
 block js
   script(src='/components/angular/angular.min.js')
   script(src='/socket.io/socket.io.js')
+  script(src='/js/vendor/qrcode.js')
   script.
     var socket = io();
 
 block content
   .wall(ng-cloak ng-app='xingwall' xingwall=wall_id)
+    #qr
 
     section.wall-section.wall-profiles
       ul
@@ -19,9 +21,8 @@ block content
       h1= "{{currentProfile.displayName}}"
       img.profile-photo(ng-src="{{currentProfile.photoUrls.size_256x256}}")
 
-    section.wall-section.wall-actions
-      .wall-actions-shell
-        button.btn.action(ng-click='openPopup()') Connect with XING
+      //button.btn.action(ng-click='openPopup()') Connect with XING
 
 block footer_js
   script(src='/js/client.js')
+  script(src='/js/qr.js')
