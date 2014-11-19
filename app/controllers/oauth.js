@@ -17,7 +17,7 @@ module.exports = function (app, io) {
       });
   });
 
-  app.get('/connect/:wall_id', function (req, res) {
+  app.get('/walls/:wall_id/connect', function (req, res) {
     // XXX ugly hack
     var existingAuthorizeCallback = xingApi.oauth._authorize_callback;
     xingApi.oauth._authorize_callback = existingAuthorizeCallback + '?wall_id=' + req.params.wall_id;
