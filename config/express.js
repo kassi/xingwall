@@ -6,7 +6,11 @@ var express        = require('express'),
     bodyParser     = require('body-parser'),
     compress       = require('compression'),
     methodOverride = require('method-override'),
-    root           = require('path').normalize(__dirname + '/..');
+    mongoose       = require('mongoose'),
+    root           = require('path').normalize(__dirname + '/..'),
+    session        = require('express-session'),
+    MongoStore     = require('connect-mongo')(session);
+
 
 module.exports = function (app, io) {
   app.set('views', root + '/app/views');
@@ -22,6 +26,15 @@ module.exports = function (app, io) {
   app.use(compress());
   app.use(express.static(root + '/public'));
   app.use(methodOverride());
+
+  app.use(session({
+    secret: process.env.COOKIE_SECRET,
+    saveUninitialized: true,
+    resave: true,
+    store: new MongoStore({
+      mongoose_connection: mongoose.connection
+    })
+  }));
 
   var models = glob.sync(root + '/app/models/*.js');
   models.forEach(function (model) {
