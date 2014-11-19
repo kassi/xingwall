@@ -24,7 +24,8 @@
     "socket.io": "^1.2.0",
     "xing-api": "git://github.com/volkert/xing-api-nodejs#master",
     "connect-mongo": "^0.4.1",
-    "express-session": "^1.9.1"
+    "express-session": "^1.9.1",
+    "basic-authentication": "^1.5.9"
   },
   "devDependencies": {
     "dotenv": "~0.4.0",

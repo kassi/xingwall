@@ -1,16 +1,22 @@
-var XINGApi  = require('xing-api'),
-    mongoose = require('mongoose'),
-    Wall     = mongoose.model('Wall'),
-    Profile  = mongoose.model('Profile'),
-    xingApi  = new XINGApi({
+var XINGApi        = require('xing-api'),
+    mongoose       = require('mongoose'),
+    Wall           = mongoose.model('Wall'),
+    Profile        = mongoose.model('Profile'),
+    xingApi        = new XINGApi({
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
       oauthCallback: process.env.OAUTH_CALLBACK
+    }),
+    authentication = require('basic-authentication')({
+      user: process.env.ADMIN_USER,
+      password: process.env.ADMIN_PASSWORD
     });
 
 module.exports = function (app, io) {
-  app.get('/', function (req, res) {
-    Wall.find().exec()
+  app.get('/', authentication, function (req, res) {
+    Wall.find()
+      .populate('profiles', 'displayName')
+      .exec()
       .then(function (walls) {
         res.render('index', { walls: walls });
       }, function (err) {
