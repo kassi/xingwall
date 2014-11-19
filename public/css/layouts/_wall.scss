@@ -1,6 +1,7 @@
 $_wall_offset: 20px;
 $_detail_offset_x: 10%;
 $_detail_offset_y: 20%;
+$_detail_width: 700px;
 
 .wall {
   background: #fff;
@@ -58,13 +59,15 @@ $_detail_offset_y: 20%;
   }
 }
 
+
 .wall-details {
   display: none;
   position: absolute;
   top: $_detail_offset_y;
   bottom: $_detail_offset_y;
-  left: $_detail_offset_x;
-  right: $_detail_offset_x;
+  left: 50%;
+  width: $_detail_width;
+  margin-left: -($_detail_width / 2);
   z-index: 999;
   background: $col-white;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);

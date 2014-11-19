@@ -88,8 +88,9 @@ body {
   position: absolute;
   top: 20%;
   bottom: 20%;
-  left: 10%;
-  right: 10%;
+  left: 50%;
+  width: 700px;
+  margin-left: -350px;
   z-index: 999;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
