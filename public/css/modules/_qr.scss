@@ -1,9 +1,34 @@
-$_qr_offset: 20px;
+$_qr_offset_x: 20px;
+$_qr_offset_y: 10px;
+
+
+.qr-wrapper {
+  position: absolute;
+  right: $_qr_offset_x;
+  bottom: $_qr_offset_y;
+  z-index: 9999;
+}
 
 #qr {
-  position: absolute;
-  bottom: $_qr_offset;
-  right: $_qr_offset;
-  z-index: 9999;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.qr-title {
+  font-size: $font-m;
+  text-align: center;
+  margin: 8px 0;
+  font-family: $font-family-digital;
+  color: $col-primary-shade;
+
+  &.intro {
+    font-size: 17px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+  }
+}
+
+@include breakpoint(mobile) {
+  #qr {
+    display: none;
+  }
 }

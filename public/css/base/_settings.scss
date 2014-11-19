@@ -1,6 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
 
 $font-family: Lato, sans-serif;
+$font-family-digital: 'Press Start 2P', $font-family;
 
 // http://modularscale.com/scale/?px1=14&px2=18&ra1=1.618&ra2=0
 $font-s: 11.125px;
@@ -22,3 +24,5 @@ $space-quad: $space-double * 2;
 
 $radius: 4px;
 
+$breakpoint-mobile: 420px;
+$breakpoint-tablet: 700px;

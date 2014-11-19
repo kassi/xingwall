@@ -9,7 +9,10 @@ block js
 
 block content
   .wall(ng-cloak ng-app='xingwall' xingwall=wall_id)
-    #qr
+    .qr-wrapper
+      .qr-title.intro Connect
+      #qr
+      .qr-title with XING
 
     section.wall-section.wall-profiles
       ul
