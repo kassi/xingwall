@@ -26,13 +26,15 @@ angular.module('xingwall', [])
           });
         };
 
-        $scope.setCurrentProfile = function(profile) {
+        $scope.setCurrentProfile = function(event, profile) {
           if($scope.currentProfile) {
             $scope.currentProfile.isActive = false;
           }
 
           $scope.currentProfile = profile;
           $scope.currentProfile.isActive = true;
+
+          event.preventDefault();
         };
 
         socket.on('profiles:updated', function () {

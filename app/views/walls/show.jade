@@ -18,7 +18,7 @@ block content
     section.wall-section.wall-profiles
       ul
         li(ng-repeat='profile in profiles')
-          a.wall-profile-entry(href="#" ng-click='setCurrentProfile(profile)' ng-class='{ active: profile.isActive }')
+          a.wall-profile-entry(href='#' ng-click='setCurrentProfile($event, profile)' ng-class='{ active: profile.isActive }')
             img(ng-src="{{profile.photoUrls.size_128x128}}")
 
     section.wall-section.wall-details
