@@ -22,7 +22,9 @@
     "morgan": "~1.1.1",
     "serve-favicon": "~2.0.1",
     "socket.io": "^1.2.0",
-    "xing-api": "git://github.com/volkert/xing-api-nodejs#master"
+    "xing-api": "git://github.com/volkert/xing-api-nodejs#master",
+    "connect-mongo": "^0.4.1",
+    "express-session": "^1.9.1"
   },
   "devDependencies": {
     "dotenv": "~0.4.0",

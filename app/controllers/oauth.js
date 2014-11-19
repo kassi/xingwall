@@ -1,6 +1,7 @@
 var XINGApi  = require('xing-api'),
     mongoose = require('mongoose'),
     Wall     = mongoose.model('Wall'),
+    Profile  = mongoose.model('Profile'),
     xingApi  = new XINGApi({
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
@@ -52,25 +53,42 @@ module.exports = function (app, io) {
 
           Wall.findOne({ _id: req.query.wall_id }).exec()
             .then(function (wall) {
-              // remove use if already there
-              wall.profiles.pull({_id: user.id });
 
-              wall.profiles.push({
-                _id: user.id,
+              var profile = new Profile({
+                userId: user.id,
                 displayName: user.display_name,
                 photoUrls: {
                   size_128x128: user.photo_urls.size_128x128,
                   size_256x256: user.photo_urls.size_256x256
                 }
-              });
-              wall.save(function (err) {
-                if(err) {
-                  console.error(err);
-                } else {
-                  io.emit('profiles:updated');
-                  res.render('oauth/callback', {url: "/walls/" + req.query.wall_id });
-                }
-              });
+              }).toObject();
+
+              delete profile._id; // make sure that we don't overwrite the internal _id on an update
+
+              Profile.findOneAndUpdate({ userId: user.id }, profile, { upsert: true }).exec()
+                .then(function (profile) {
+                  wall.profiles.pull(profile._id);
+                  wall.profiles.push(profile._id);
+
+                  wall.save(function (err) {
+                    if (err) {
+                      console.error(err);
+                      res.render('error');
+                    } else {
+                      req.session.user = {
+                        id: profile._id,
+                        oauthToken: oauthToken,
+                        oauthTokenSecret: oauthTokenSecret
+                      };
+
+                      io.emit('profiles:updated');
+                      res.render('oauth/callback', { url: "/walls/" + req.query.wall_id });
+                    }
+                  });
+                });
+
+            }, function (err) {
+              console.log(err);
             });
         });
       });

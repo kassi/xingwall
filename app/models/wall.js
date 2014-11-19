@@ -1,17 +1,8 @@
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+    Schema   = mongoose.Schema,
+    Profile  = mongoose.model('Profile');
 
-var WallSchema = new Schema({
-  profiles: [
-    {
-      _id: String,
-      displayName: String,
-      photoUrls: {
-        size_128x128: String,
-        size_256x256: String
-      }
-    }
-  ]
-});
-
-mongoose.model('Wall', WallSchema);
+mongoose.model('Wall', new Schema({
+  name: String,
+  profiles: [{ type: Schema.Types.ObjectId, ref: 'Profile' }]
+}));
