@@ -134,6 +134,6 @@ body {
     letter-spacing: 1px; }
 
 @media (max-width: 420px) {
-  #qr {
+  .qr-wrapper {
     display: none; }
  }

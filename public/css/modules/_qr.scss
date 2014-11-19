@@ -28,7 +28,7 @@ $_qr_offset_y: 10px;
 }
 
 @include breakpoint(mobile) {
-  #qr {
+  .qr-wrapper {
     display: none;
   }
 }
