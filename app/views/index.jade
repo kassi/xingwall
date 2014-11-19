@@ -2,10 +2,18 @@ extends layout
 
 block content
   div
-    ul.walls
-      each wall in walls
-        li
-          a(href='/walls/'+ wall._id) #{wall._id}
-
+    each wall in walls
+      details
+        summary
+          a(href='/walls/#{wall._id}') #{wall.name}
+        each profile in wall.profiles
+          p #{profile.displayName}
+            form(method='post', action='/walls/#{wall.id}/remove_profile')
+              input(type='hidden' name='profile_id' value=profile._id)
+              input(type='submit' value='X')
+    hr
     form(method='post', action='/walls')
+      label Name of the wall:
+        input(type='text', name='name' required)
+      br
       input(type='submit', value='Create a new wall')
