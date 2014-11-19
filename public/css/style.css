@@ -33,25 +33,35 @@ table {
 body {
   font-size: 14px;
   font-family: Lato, sans-serif;
-  background: #fff;
+  background: #eee url('/img/pattern.png');
   color: #222; }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
-.wall:after {
-  display: block;
-  content: "";
-  clear: both; }
+.wall {
+  background: #fff;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); }
+  .wall:after {
+    display: block;
+    content: "";
+    clear: both; }
+
+.wall-content {
+  position: relative;
+  width: 100%;
+  height: 100%; }
 
 .wall-section {
-  float: left;
-  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto; }
 
 .wall-profiles {
-  width: 70%;
   list-style-type: none; }
 
 .wall-profile-entry {
@@ -64,10 +74,30 @@ body {
   .wall-profile-entry.active, .wall-profile-entry:hover {
     opacity: 1; }
 
+#overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99; }
+  #overlay.active {
+    display: block; }
+
 .wall-details {
-  width: 30%;
-  background: #eee url('/img/pattern.png');
-  box-shadow: inset 2px 0 3px rgba(0, 0, 0, 0.1); }
+  display: none;
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 10%;
+  right: 10%;
+  z-index: 999;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+  .wall-details.active {
+    display: block; }
   .wall-details h1 {
     text-align: center;
     font-size: 42px;
@@ -75,7 +105,19 @@ body {
   .wall-details .profile-photo {
     display: block;
     margin: 40px auto;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
+  .wall-details .close {
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    font-size: 42px;
+    color: #006567;
+    text-decoration: none;
+    background: transparent;
+    transition: font-size 100ms; }
+    .wall-details .close:hover {
+      color: #004c4e;
+      font-size: 47px; }
 
 .welcome h1 {
   text-align: center;
@@ -114,7 +156,7 @@ body {
   position: absolute;
   right: 20px;
   bottom: 10px;
-  z-index: 9999; }
+  z-index: 50; }
 
 #qr {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
