@@ -35,6 +35,10 @@ module.exports = function (app, io) {
   });
 
   app.get('/oauth_callback', function (req, res) {
+    if (!req.signedCookies.requestToken) {
+      return res.redirect("/");
+    }
+
     var requestToken = JSON.parse(req.signedCookies.requestToken);
 
     xingApi.getAccessToken(requestToken.token, requestToken.secret, req.query.oauth_verifier,
