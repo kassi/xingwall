@@ -10,6 +10,7 @@ $_detail_offset_y: 20%;
   right: $_wall_offset;
   bottom: $_wall_offset;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  overflow: auto;
 
   &:after {
     display: block;
@@ -24,10 +25,6 @@ $_detail_offset_y: 20%;
   height: 100%;
 }
 
-.wall-section {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
 
 .wall-profiles {
   list-style-type: none;
@@ -71,6 +68,7 @@ $_detail_offset_y: 20%;
   z-index: 999;
   background: $col-white;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  overflow: auto;
 
   &.active {
     display: block;
