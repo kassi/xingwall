@@ -1,0 +1,21 @@
+.welcome {
+  h1 {
+    text-align: center;
+    font-size: $font-xl;
+    color: $col-primary;
+    margin: $space-double 0;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  a {
+    color: $col-primary;
+
+    &:hover {
+      color: $col-primary-shade;
+      text-decoration: none;
+    }
+  }
+}

@@ -68,7 +68,7 @@ module.exports = function (app, io) {
                   console.error(err);
                 } else {
                   io.emit('profiles:updated');
-                  res.render('oauth/callback');
+                  res.render('oauth/callback', {url: "/walls/" + req.query.wall_id });
                 }
               });
             });
