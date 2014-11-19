@@ -16,11 +16,11 @@ module.exports = function (app, io) {
   app.get('/walls/:wall_id', function (req, res, next) {
     var wall_id = req.params.wall_id;
     Wall.findById(wall_id, function (err, wall) {
-      if (err) {
+      if (err || !wall) {
         console.log(err);
         res.redirect('/');
       } else {
-        res.render('walls/show', { wall_id: wall.id });
+        res.render('walls/show', { wall_id: wall._id });
       }
     });
   });
