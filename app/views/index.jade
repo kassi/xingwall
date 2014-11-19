@@ -1,13 +1,7 @@
 extends layout
 
-block js
-  script(src='/components/angular/angular.min.js')
-  script(src='/socket.io/socket.io.js')
-  script.
-    var socket = io();
-
 block content
-  div(ng-app='xingwall' xingwall)
+  div
     ul.walls
       each wall in walls
         li
@@ -15,7 +9,3 @@ block content
 
     form(method='post', action='/walls')
       input(type='submit', value='Create a new wall')
-
-
-block footer_js
-  script(src='/js/client.js')
