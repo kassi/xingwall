@@ -4,9 +4,12 @@ $_qr_offset_y: 10px;
 
 .qr-wrapper {
   position: absolute;
-  right: $_qr_offset_x;
-  bottom: $_qr_offset_y;
+  padding: $_qr_offset_y $_qr_offset_x;
+  bottom: 0;
+  right: 0;
   z-index: 50;
+  background: $col-white;
+  border: 1px solid #eee;
 }
 
 #qr {
