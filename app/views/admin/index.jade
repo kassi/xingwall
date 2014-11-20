@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   div
@@ -8,11 +8,11 @@ block content
           a(href='/walls/#{wall._id}') #{wall.name}
         each profile in wall.profiles
           p #{profile.displayName}
-            form(method='post', action='/walls/#{wall.id}/remove_profile')
+            form(method='post', action='/admin/walls/#{wall.id}/remove_profile')
               input(type='hidden' name='profile_id' value=profile._id)
               input(type='submit' value='X')
     hr
-    form(method='post', action='/walls')
+    form(method='post', action='/admin/walls')
       label Name of the wall:
         input(type='text', name='name' required)
       br

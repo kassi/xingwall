@@ -6,24 +6,9 @@ var XINGApi        = require('xing-api'),
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
       oauthCallback: process.env.OAUTH_CALLBACK
-    }),
-    authentication = require('basic-authentication')({
-      user: process.env.ADMIN_USER,
-      password: process.env.ADMIN_PASSWORD
     });
 
 module.exports = function (app, io) {
-  app.get('/', authentication, function (req, res) {
-    Wall.find()
-      .populate('profiles', 'displayName')
-      .exec()
-      .then(function (walls) {
-        res.render('index', { walls: walls });
-      }, function (err) {
-        console.error(err);
-      });
-  });
-
   app.get('/walls/:wall_id/connect', function (req, res) {
     // XXX ugly hack
     var existingAuthorizeCallback = xingApi.oauth._authorize_callback;
