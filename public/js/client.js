@@ -43,10 +43,11 @@ angular.module('xingwall', [])
 
         socket.on('profiles:updated', function (profile) {
           $scope.loadData(function() {
+            if (!profile) { return;}
+
             $scope.profiles.filter(function(x, i) {
               if (x.userId === profile.userId) {
-                $scope.profiles.slice(i, 1);
-                return;
+                $scope.profiles.splice(i, 1);
               }
             });
 
