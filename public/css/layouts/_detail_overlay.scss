@@ -62,11 +62,14 @@ $_detail_width: 600px;
 
     h1 {
       margin: $space 0 $space-double;
+      font-size: $font-xl;
     }
 
     .profile-photo {
       margin-top: $space-double;
       margin-bottom: $space-double;
+      width: 128px;
+      height: 128px;
     }
   }
 }

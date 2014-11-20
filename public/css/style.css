@@ -126,10 +126,13 @@ body {
     .wall-details .close:hover {
       font-size: 42px; }
   .wall-details h1 {
-    margin: 10px 0 20px; }
+    margin: 10px 0 20px;
+    font-size: 22.652px; }
   .wall-details .profile-photo {
     margin-top: 20px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    width: 128px;
+    height: 128px; }
  }
 
 .welcome h1 {

@@ -24,7 +24,7 @@ $(function() {
       };
     }
 
-    $el.on( "touchstart mousedown", function ( event ) {
+    $el.on( "touchstart", function ( event ) {
       touchDown = true;
       originalPosition = {
         x: event.originalEvent.pageX,
@@ -32,12 +32,12 @@ $(function() {
       };
     } );
 
-    $el.on( "touchend mouseup", function () {
+    $el.on( "touchend", function () {
       touchDown = false;
       originalPosition = null;
     } );
 
-    $el.on( "touchmove mousemove", function ( event ) {
+    $el.on( "touchmove", function ( event ) {
       if ( !touchDown ) { return;}
       var info = swipeInfo( event );
       var result = callback( info.direction, info.offset );
