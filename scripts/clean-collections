@@ -1,0 +1,16 @@
+#!/bin/bash
+# Remove all data from the mongodb collections.
+# This is useful if you want to reimport the data.
+
+mongo_url=$1
+
+if [[ -z "${mongo_url}" ]]; then
+  echo "Usage: $0 <mongo_url>"
+  exit 1
+fi
+
+cat <<EOF | mongo "${mongo_url}"
+db.profiles.remove({})
+db.walls.remove({})
+db.sessions.remove({})
+EOF
