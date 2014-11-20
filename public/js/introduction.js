@@ -1,6 +1,6 @@
 (function(exports) {
   $(function() {
-    var MOUSE_WAIT_TIME = 7 * 1000;
+    var MOUSE_WAIT_TIME = 6 * 1000;
     var PRESENT_TIME = 4 * 1000;
 
     var $window = $(window),
@@ -58,7 +58,7 @@
       }
     }
 
-    $window.on('mousemove', function() {
+    $window.on('mousemove mousemove keyup', function() {
       if (stopped) { return;}
       intro.resume();
     });
