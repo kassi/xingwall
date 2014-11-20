@@ -9,7 +9,7 @@
       $close    = $detail.find('.close'),
       $switch   = $('.intro-switch'),
       stopped   = false,
-      mouseWatch;
+      timer;
 
     var intro = {
       getProfiles: function () {
@@ -22,15 +22,12 @@
       },
 
       introduce: function () {
-        clearTimeout(mouseWatch);
+        clearTimeout(timer);
 
         var $random = this.randomProfile();
         $random.addClass('active');
-
-        mouseWatch = setTimeout(function() {
-          $random.trigger('click');
-          mouseWatch = setTimeout(this.close.bind(this), PRESENT_TIME);
-        }.bind(this), 800);
+        $random.trigger('click');
+        timer = setTimeout(this.close.bind(this), PRESENT_TIME);
       },
 
       close: function () {
@@ -44,16 +41,16 @@
           $switch.removeClass('active');
         }
 
-        clearTimeout(mouseWatch);
+        clearTimeout(timer);
       },
 
       resume: function () {
-        clearTimeout(mouseWatch);
+        clearTimeout(timer);
 
         if ($detail.is(':visible')) {
-          mouseWatch = setTimeout(intro.close.bind(this), PRESENT_TIME);
+          timer = setTimeout(intro.close.bind(this), PRESENT_TIME);
         } else {
-          mouseWatch = setTimeout(intro.introduce.bind(this), MOUSE_WAIT_TIME);
+          timer = setTimeout(intro.introduce.bind(this), MOUSE_WAIT_TIME);
         }
 
         $switch.addClass('active');
@@ -63,8 +60,7 @@
 
     $window.on('mousemove', function() {
       if (stopped) { return;}
-      intro.stop();
-      intro.resume(); // Have to resume immedietly, no mouse stop event
+      intro.resume();
     });
 
     $switch.on('click', function() {
