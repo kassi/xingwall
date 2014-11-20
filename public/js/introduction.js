@@ -25,7 +25,6 @@
         clearTimeout(timer);
 
         var $random = this.randomProfile();
-        $random.addClass('active');
         $random.trigger('click');
         timer = setTimeout(this.close.bind(this), PRESENT_TIME);
       },
@@ -47,7 +46,7 @@
       resume: function () {
         clearTimeout(timer);
 
-        if ($detail.is(':visible')) {
+        if ($detail.hasClass('active')) {
           timer = setTimeout(intro.close.bind(this), PRESENT_TIME);
         } else {
           timer = setTimeout(intro.introduce.bind(this), MOUSE_WAIT_TIME);

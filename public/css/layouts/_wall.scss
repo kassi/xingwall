@@ -42,7 +42,7 @@ $_wall_offset: 20px;
 }
 
 #overlay {
-  display: none;
+  //display: none;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -50,8 +50,13 @@ $_wall_offset: 20px;
   right: 0;
   background: rgba(0,0,0,0.6);
   z-index: 99;
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
 
   &.active {
-    display: block;
+    //display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 }
