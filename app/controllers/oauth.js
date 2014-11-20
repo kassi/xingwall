@@ -78,7 +78,7 @@ module.exports = function (app, io) {
                           oauthTokenSecret: oauthTokenSecret
                         };
 
-                        io.emit('profiles:updated');
+                        io.emit('profiles:updated', profile);
                         res.render('oauth/callback', { url: "/walls/" + req.query.wall_id });
                       }
                     });
