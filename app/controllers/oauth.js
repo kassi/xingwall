@@ -87,6 +87,7 @@ module.exports = function (app, io) {
                         console.error(err);
                         res.render('error');
                       } else {
+                        req.session.lastActive = new Date();
                         req.session.user = {
                           id: profile._id,
                           oauthToken: oauthToken,
