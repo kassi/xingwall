@@ -32,7 +32,8 @@ module.exports = function (app, io) {
     saveUninitialized: true,
     resave: true,
     store: new MongoStore({
-      mongoose_connection: mongoose.connection
+      mongoose_connection: mongoose.connection,
+      stringify: false
     })
   }));
 

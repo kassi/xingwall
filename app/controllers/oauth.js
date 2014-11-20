@@ -72,7 +72,10 @@ module.exports = function (app, io) {
                   photoUrls: {
                     size_128x128: user.photo_urls.size_128x128,
                     size_256x256: user.photo_urls.size_256x256
-                  }
+                  },
+                  wants: user.wants,
+                  haves: user.haves,
+                  webProfiles: user.web_profiles
                 }).toObject();
 
                 delete profile._id; // make sure that we don't overwrite the internal _id on an update
@@ -87,6 +90,7 @@ module.exports = function (app, io) {
                         console.error(err);
                         res.render('error');
                       } else {
+                        req.session.lastActive = new Date();
                         req.session.user = {
                           id: profile._id,
                           oauthToken: oauthToken,
