@@ -1,0 +1,72 @@
+$_detail_offset_x: 10%;
+$_detail_offset_y: 10%;
+$_detail_width: 600px;
+
+.wall-details {
+  display: none;
+  position: absolute;
+  top: $_detail_offset_y;
+  bottom: $_detail_offset_y;
+  left: $_detail_offset_x;
+  right: $_detail_offset_x;
+  z-index: 999;
+  background: $col-white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  overflow: auto;
+
+  &.active {
+    display: block;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: $font-headline;
+    margin: $space-double 0 $space-quad;
+  }
+
+  .profile-photo {
+    display: block;
+    margin: $space-quad auto;
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  }
+
+  .close {
+    float: left;
+    position: absolute;
+    margin: 0 0 0 10px;
+    font-size: $font-headline;
+    color: $col-primary;
+    text-decoration: none;
+    background: transparent;
+    transition: font-size 100ms;
+
+    &:hover {
+      color: $col-primary-shade;
+      font-size: $font-headline + 5;
+    }
+  }
+}
+
+@include breakpoint(mobile) {
+  .wall-details {
+    .close {
+      display: block;
+      position: static;
+      float: none;
+      transition: none;
+
+      &:hover {
+        font-size: $font-headline;
+      }
+    }
+
+    h1 {
+      margin: $space 0 $space-double;
+    }
+
+    .profile-photo {
+      margin-top: $space-double;
+      margin-bottom: $space-double;
+    }
+  }
+}

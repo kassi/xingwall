@@ -17,6 +17,11 @@ block content
       #qr
       .qr-title with XING
 
+    section.wall-details(ng-class='{active: currentProfile}')
+      a.close(href="#" ng-click='setCurrentProfile($event, false)') &times;
+      h1= "{{currentProfile.displayName}}"
+      img.profile-photo(ng-src="{{currentProfile.photoUrls.size_256x256}}")
+
     .wall
       .wall-content
         section.wall-profiles
@@ -26,13 +31,8 @@ block content
                 img(ng-src="{{profile.photoUrls.size_128x128}}")
 
 
-        section.wall-details(ng-class='{active: currentProfile}')
-          a.close(href="#" ng-click='setCurrentProfile($event, false)') &times;
-          h1= "{{currentProfile.displayName}}"
-          img.profile-photo(ng-src="{{currentProfile.photoUrls.size_256x256}}")
-
-
 block footer_js
   script(src='/js/grid.js')
   script(src='/js/client.js')
   script(src='/js/qr.js')
+  script(src='/js/keys.js')
