@@ -168,8 +168,33 @@ body {
   font-size: 22.652px;
   padding: 20px 40px; }
 
+.intro-switch {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: #ccc; }
+  .intro-switch:after {
+    padding-top: 9px;
+    display: block;
+    text-align: center;
+    color: #fff;
+    content: "OFF";
+    color: #222; }
+  .intro-switch.active {
+    background: #006567; }
+    .intro-switch.active:after {
+      padding-top: 9px;
+      display: block;
+      text-align: center;
+      color: #fff;
+      content: "ON"; }
+  .intro-switch:hover {
+    cursor: pointer; }
+
 .qr-wrapper {
-  position: absolute;
+  position: fixed;
   padding: 10px 20px;
   bottom: 0;
   right: 0;

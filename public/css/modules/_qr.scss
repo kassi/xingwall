@@ -3,7 +3,7 @@ $_qr_offset_y: 10px;
 
 
 .qr-wrapper {
-  position: absolute;
+  position: fixed;
   padding: $_qr_offset_y $_qr_offset_x;
   bottom: 0;
   right: 0;

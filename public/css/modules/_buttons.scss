@@ -23,3 +23,40 @@
   font-size: $font-xl;
   padding: $space-double $space-double*2;
 }
+
+$_switch_size: 30px;
+
+@mixin base-switch-after {
+  padding-top: 9px;
+  display: block;
+  text-align: center;
+  color: $col-white;
+}
+
+.intro-switch {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: $_switch_size;
+  height: $_switch_size;
+  background: #ccc;
+
+  &:after {
+    @include base-switch-after;
+    content: "OFF";
+    color: $col-black;
+  }
+
+  &.active {
+    background: $col-primary;
+
+    &:after {
+      @include base-switch-after;
+      content: "ON";
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
