@@ -22,11 +22,12 @@
       },
 
       introduce: function () {
-        var $random = this.randomProfile();
+        clearTimeout(mouseWatch);
 
+        var $random = this.randomProfile();
         $random.addClass('active');
 
-        setTimeout(function() {
+        mouseWatch = setTimeout(function() {
           $random.trigger('click');
           mouseWatch = setTimeout(this.close.bind(this), PRESENT_TIME);
         }.bind(this), 800);
@@ -47,6 +48,8 @@
       },
 
       resume: function () {
+        clearTimeout(mouseWatch);
+
         if ($detail.is(':visible')) {
           mouseWatch = setTimeout(intro.close.bind(this), PRESENT_TIME);
         } else {
