@@ -26,6 +26,21 @@ module.exports = function (app, io) {
     xingApi.oauth._authorize_callback = existingAuthorizeCallback;
   });
 
+  app.get('/walls/:wall_id/disconnect', function (req, res) {
+    Profile
+      .remove({_id: req.session.user.id})
+      .exec()
+      .then(function (succ) {
+        io.emit('profiles:updated', null);
+      }, function (err) {
+        console.log('Failed to remove profile', err);
+      });
+
+    req.session.user = null;
+
+    res.render('oauth/logout',  {url: "/walls/" + req.params.wall_id + "/connect"});
+  });
+
   app.get('/oauth_callback', function (req, res) {
     if (!req.signedCookies.requestToken) {
       return res.redirect("/");
@@ -79,7 +94,7 @@ module.exports = function (app, io) {
                         };
 
                         io.emit('profiles:updated', profile);
-                        res.render('oauth/callback', { url: "/walls/" + req.query.wall_id });
+                        res.render('oauth/callback', { url: "/walls/" + req.query.wall_id, wall: wall });
                       }
                     });
                   });
