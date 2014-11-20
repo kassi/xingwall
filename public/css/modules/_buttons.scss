@@ -24,8 +24,6 @@
   padding: $space-double $space-double*2;
 }
 
-$_switch_size: 30px;
-
 @mixin base-switch-after {
   padding-top: 9px;
   display: block;
@@ -37,13 +35,14 @@ $_switch_size: 30px;
   position: fixed;
   bottom: 0;
   left: 0;
-  width: $_switch_size;
-  height: $_switch_size;
+  z-index: 99;
+  width: 120px;
+  height: 30px;
   background: #ccc;
 
   &:after {
     @include base-switch-after;
-    content: "OFF";
+    content: "Introductions OFF";
     color: $col-black;
   }
 
@@ -52,7 +51,7 @@ $_switch_size: 30px;
 
     &:after {
       @include base-switch-after;
-      content: "ON";
+      content: "Introductions ON";
     }
   }
 
