@@ -17,4 +17,4 @@ echo 'DBQuery.shellBatchSize = 100; db.profiles.find({}, {_id: true})' \
       puts "db.walls.insert({name: \"standard\", profiles: [#{ids}]});"
       puts "db.walls.find({}, {_id: true}).sort({_id: 1}).limit(1)"
       ' \
-  | mongo "${mongo_url}"
+  | mongo "${mongo_url}"  | grep ObjectId | cut -d'"' -f4
