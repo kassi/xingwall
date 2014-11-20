@@ -24,10 +24,49 @@ $_detail_width: 600px;
     margin: $space-double 0 $space-quad;
   }
 
+  h2 {
+    font-size: $font-xl;
+    font-weight: bold;
+    margin: $space 0 $space-double;
+  }
+
+  a {
+    text-decoration: none;
+    color: $col-primary;
+
+    &:hover {
+      text-decoration: underline;
+      color: $col-primary-shade;
+    }
+  }
+
   .profile-photo {
     display: block;
     margin: $space-quad auto;
     box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  }
+
+  .content-line {
+    width: 90%;
+    display: block;
+    font-size: $font-m;
+    line-height: $font-l;
+    margin: 0 auto $space;
+
+    strong {
+      font-weight: bold;
+      font-size: $font-l;
+      margin: 0 $space-half 0 0;
+    }
+
+    ul {
+      list-style-type: square;
+      margin-left: $space * 3;
+
+      li {
+        margin: $space-half 0;
+      }
+    }
   }
 
   .close {

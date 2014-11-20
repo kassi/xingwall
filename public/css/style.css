@@ -100,10 +100,35 @@ body {
     text-align: center;
     font-size: 42px;
     margin: 20px 0 40px; }
+  .wall-details h2 {
+    font-size: 22.652px;
+    font-weight: bold;
+    margin: 10px 0 20px; }
+  .wall-details a {
+    text-decoration: none;
+    color: #006567; }
+    .wall-details a:hover {
+      text-decoration: underline;
+      color: #004c4e; }
   .wall-details .profile-photo {
     display: block;
     margin: 40px auto;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
+  .wall-details .content-line {
+    width: 90%;
+    display: block;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 auto 10px; }
+    .wall-details .content-line strong {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0 5px 0 0; }
+    .wall-details .content-line ul {
+      list-style-type: square;
+      margin-left: 30px; }
+      .wall-details .content-line ul li {
+        margin: 5px 0; }
   .wall-details .close {
     float: left;
     position: absolute;

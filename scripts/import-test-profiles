@@ -8,7 +8,7 @@ filename = ARGV[0]
 
 abort "Usage: #{$0} <filename>" unless filename
 
-content = File.read(filename)
+content = File.read(filename).force_encoding('utf-8')
 json = JSON.parse(content)
 
 json['contacts']['users'].each do |user|
@@ -17,10 +17,11 @@ json['contacts']['users'].each do |user|
   print "wants: #{(user['wants'] || '' ).inspect}, "
   print "haves: #{(user['haves'] || '').inspect}, "
   print "interests: #{(user['interests'] || '').inspect}, "
-  print "web_profiles: {"
-  print ((user['web_profiles'] || {}).keys.map do |profile|
+  print "webProfiles: {"
+  profiles = (user['web_profiles'] || {}).keys.map do |profile|
     "#{profile.gsub('.', '_').inspect}: #{user['web_profiles'][profile].to_json}"
-  end.join(','))
+  end.join(',')
+  print profiles
   print "},"
   print "displayName: \"#{user['display_name']}\", "
   print "photoUrls: { size_128x128: #{user['photo_urls']['size_128x128'].inspect}, size_256x256: #{user['photo_urls']['size_256x256'].inspect}}"
