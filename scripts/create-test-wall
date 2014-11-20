@@ -1,0 +1,20 @@
+#!/bin/bash
+# Connects to your local mongodb and creates a new wall containing all existing profiles
+
+mongo_url=$1
+
+if [[ -z "${mongo_url}" ]]; then
+  echo "Usage: $0 <mongo_url>"
+  exit 1
+fi
+
+echo 'DBQuery.shellBatchSize = 100; db.profiles.find({}, {_id: true})' \
+  | mongo "${mongo_url}" \
+  | grep ObjectId \
+  | cut -d '"' -f4 | xargs echo \
+  | ruby -ne '
+      ids = $_.split(" ").map {|a| "ObjectId(\"#{a}\")" }.join(", ");
+      print "db.wall.insert({name: \"standard\", profiles: [#{ids}]})"
+      ' \
+  | mongo "${mongo_url}"
+
