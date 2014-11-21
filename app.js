@@ -43,6 +43,6 @@ eventEmitter.on('tokenCheck', function () {
 
 setInterval(function () {
   eventEmitter.emit('tokenCheck');
-}, 1000);
+}, 5 * 60 * 1000);
 
 http.listen(process.env.PORT || 3000);
