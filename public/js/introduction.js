@@ -83,7 +83,7 @@
     });
 
     // Begin the introduction on page load
-    intro.resume();
+    intro.stop();
 
     // Make intro module available to global scope
     exports.intro = intro;
