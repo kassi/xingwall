@@ -99,13 +99,17 @@ body {
   opacity: 0;
   transition: opacity 1s;
   pointer-events: none; }
+  .wall-details:after {
+    clear: both;
+    content: '';
+    display: block; }
   .wall-details.active {
     opacity: 1;
     pointer-events: auto; }
   .wall-details h1 {
     text-align: center;
     font-size: 42px;
-    margin: 20px 0 40px; }
+    margin: 40px 0; }
   .wall-details h2 {
     font-size: 22.652px;
     font-weight: bold;
@@ -117,7 +121,7 @@ body {
     width: 256px;
     height: 256px; }
   .wall-details .content-line {
-    width: 90%;
+    width: 95%;
     display: block;
     font-size: 14px;
     line-height: 18px;
@@ -149,6 +153,14 @@ body {
     .wall-details .close:hover {
       color: #004c4e;
       font-size: 47px; }
+  .wall-details .col {
+    margin-top: 20px; }
+    .wall-details .col.photo {
+      float: left;
+      width: 340px; }
+    .wall-details .col.info {
+      overflow: hidden;
+      width: auto; }
 
 @media (max-width: 420px) {
   .wall-details .close {

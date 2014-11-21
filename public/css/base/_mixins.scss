@@ -6,3 +6,11 @@
      @media (max-width: $breakpoint-tablet) { @content ; }
   }
 }
+
+@mixin after-clear {
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+}
