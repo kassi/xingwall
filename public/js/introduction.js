@@ -5,8 +5,6 @@
 
     var $window = $(window),
       $document = $(document),
-      $detail   = $('.wall-details'),
-      $close    = $detail.find('.close'),
       $switch   = $('.intro-switch'),
       stopped   = false,
       timer;
@@ -14,6 +12,10 @@
     var intro = {
       getProfiles: function () {
         return $('.wall-profile-entry');
+      },
+
+      getDetail: function () {
+        return $('.wall-details');
       },
 
       randomProfile: function () {
@@ -30,7 +32,7 @@
       },
 
       close: function () {
-        $close.trigger('click');
+        this.getDetail().find('.close').trigger('click');
         $window.trigger('mousemove');
       },
 
@@ -46,7 +48,7 @@
       resume: function () {
         clearTimeout(timer);
 
-        if ($detail.hasClass('active')) {
+        if (this.getDetail().hasClass('active')) {
           timer = setTimeout(intro.close.bind(this), PRESENT_TIME);
         } else {
           timer = setTimeout(intro.introduce.bind(this), MOUSE_WAIT_TIME);

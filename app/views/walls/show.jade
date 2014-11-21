@@ -23,85 +23,85 @@ block content
       a.close(href="#" ng-click='setCurrentProfile($event, false)') &times;
 
       .col.photo
-        img.profile-photo(ng-src="{{currentProfile.photoUrls.size_256x256}}")
+        img.profile-photo(ng-src="{{currentProfilePhotoUrl}}")
 
       .col.info
-        h1= "{{currentProfile.displayName}}"
+        h1= "{{displayProfile.displayName}}"
 
-        p.content-line(ng-if="currentProfile.wants")
+        p.content-line(ng-if="displayProfile.wants")
           strong Wants
-          = "{{currentProfile.wants}}"
+          = "{{displayProfile.wants}}"
 
-        p.content-line(ng-if="currentProfile.haves")
+        p.content-line(ng-if="displayProfile.haves")
           strong Haves
-          = "{{currentProfile.haves}}"
+          = "{{displayProfile.haves}}"
 
         //h2 Web Profiles
 
-        .content-line(ng-if="currentProfile.webProfiles.homepage.length")
+        .content-line(ng-if="displayProfile.webProfiles.homepage.length")
           strong Homepage
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.homepage')
+            li(ng-repeat='link in displayProfile.webProfiles.homepage')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.facebook.length")
+        .content-line(ng-if="displayProfile.webProfiles.facebook.length")
           strong Facebook
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.facebook')
+            li(ng-repeat='link in displayProfile.webProfiles.facebook')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.twitter.length")
+        .content-line(ng-if="displayProfile.webProfiles.twitter.length")
           strong Twitter
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.twitter')
+            li(ng-repeat='link in displayProfile.webProfiles.twitter')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles['google+'].length")
+        .content-line(ng-if="displayProfile.webProfiles['google+'].length")
           strong Google+
           ul
-            li(ng-repeat='link in currentProfile.webProfiles["google+"]')
+            li(ng-repeat='link in displayProfile.webProfiles["google+"]')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.amazon.length")
+        .content-line(ng-if="displayProfile.webProfiles.amazon.length")
           strong Amazon
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.amazon')
+            li(ng-repeat='link in displayProfile.webProfiles.amazon')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.ebay.length")
+        .content-line(ng-if="displayProfile.webProfiles.ebay.length")
           strong Ebay
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.ebay')
+            li(ng-repeat='link in displayProfile.webProfiles.ebay')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.youtube.length")
+        .content-line(ng-if="displayProfile.webProfiles.youtube.length")
           strong YouTube
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.youtube')
+            li(ng-repeat='link in displayProfile.webProfiles.youtube')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.yelp.length")
+        .content-line(ng-if="displayProfile.webProfiles.yelp.length")
           strong Yelp
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.yelp')
+            li(ng-repeat='link in displayProfile.webProfiles.yelp')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.reddit.length")
+        .content-line(ng-if="displayProfile.webProfiles.reddit.length")
           strong Reddit
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.reddit')
+            li(ng-repeat='link in displayProfile.webProfiles.reddit')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.foursquare.length")
+        .content-line(ng-if="displayProfile.webProfiles.foursquare.length")
           strong Foursquare
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.foursquare')
+            li(ng-repeat='link in displayProfile.webProfiles.foursquare')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
-        .content-line(ng-if="currentProfile.webProfiles.flickr.length")
+        .content-line(ng-if="displayProfile.webProfiles.flickr.length")
           strong Flickr
           ul
-            li(ng-repeat='link in currentProfile.webProfiles.flickr')
+            li(ng-repeat='link in displayProfile.webProfiles.flickr')
               a(href="{{link}}" target="_blank")= "{{link}}"
 
 

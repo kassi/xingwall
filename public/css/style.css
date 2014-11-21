@@ -39,6 +39,9 @@ body {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
+.hidden {
+  display: none; }
+
 .wall {
   background: #fff;
   position: absolute;
@@ -70,21 +73,6 @@ body {
   transition: opacity 0.5s; }
   .wall-profile-entry.active, .wall-profile-entry:hover {
     opacity: 1; }
-
-#overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 99;
-  opacity: 0;
-  transition: opacity 1s;
-  pointer-events: none; }
-  #overlay.active {
-    opacity: 1;
-    pointer-events: auto; }
 
 .wall-details {
   position: absolute;
@@ -161,6 +149,21 @@ body {
     .wall-details .col.info {
       overflow: hidden;
       width: auto; }
+
+#overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none; }
+  #overlay.active {
+    opacity: 1;
+    pointer-events: auto; }
 
 @media (max-width: 420px) {
   .wall-details .close {

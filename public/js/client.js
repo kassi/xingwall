@@ -30,6 +30,22 @@ angular.module('xingwall', [])
           });
         };
 
+        var timer;
+        function setDisplayProfile ($scope, profile, timeout) {
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            $scope.displayProfile = profile;
+
+            if (profile) {
+              $scope.currentProfilePhotoUrl = profile.photoUrls.size_256x256;
+            } else {
+              $scope.currentProfilePhotoUrl = '/img/loading.gif';
+            }
+
+            $scope.$apply();
+          }, timeout);
+        }
+
         $scope.setCurrentProfile = function(event, profile) {
           if($scope.currentProfile) {
             $scope.currentProfile.isActive = false;
@@ -37,6 +53,8 @@ angular.module('xingwall', [])
 
           $scope.currentProfile = profile;
           $scope.currentProfile.isActive = true;
+
+          setDisplayProfile($scope, profile, (profile ? 0 : 1000));
 
           event.preventDefault();
         };
