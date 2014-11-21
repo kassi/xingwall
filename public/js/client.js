@@ -1,6 +1,31 @@
 angular.module('xingwall', [])
 
   .service('Profile', function ($q) {
+    var webProfiles = {
+      amazon: 'Amazon',
+      delicious: 'Delicious',
+      digg: 'Digg',
+      doodle: 'Doodle',
+      ebay: 'eBay',
+      facebook: 'Facebook',
+      flickr: 'Flickr',
+      foursquare: 'Foursquare',
+      github: 'GitHub',
+      'google+': 'Google+',
+      homepage: 'Website',
+      last_fm: 'Last.fm',
+      other: 'Other',
+      photobucket: 'Photobucket',
+      reddit: 'Reddit',
+      slideshare: 'Slideshare',
+      'stumble upon': 'Stumble upon',
+      twitter: 'Twitter',
+      vimeo: 'Vimeo',
+      wikipedia: 'Wikipedia',
+      yelp: 'Yelp',
+      youtube: 'YouTube'
+    };
+
     this.all = function (opts) {
       var deferred = $q.defer();
       socket.emit('profiles:all', opts);
@@ -10,6 +35,10 @@ angular.module('xingwall', [])
       });
 
       return deferred.promise;
+    };
+
+    this.labelForWebProfile = function (webProfile) {
+      return webProfiles[webProfile];
     }
   })
 
@@ -40,6 +69,8 @@ angular.module('xingwall', [])
 
           event.preventDefault();
         };
+
+        $scope.labelForWebProfile = Profile.labelForWebProfile;
 
         socket.on('profiles:updated', function (profile) {
           $scope.loadData(function () {

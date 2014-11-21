@@ -1,7 +1,17 @@
-var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema;
+var mongoose       = require('mongoose'),
+    Schema         = mongoose.Schema,
+    webProfilesDef = {},
+    webProfiles    = [
+      'amazon', 'delicious', 'digg', 'doodle', 'ebay', 'facebook', 'flickr', 'foursquare', 'github', 'google+',
+      'homepage', 'last_fm', 'other', 'photobucket', 'reddit', 'slideshare', 'stumble upon', 'twitter', 'vimeo',
+      'wikipedia', 'yelp', 'youtube'
+    ];
 
-mongoose.model('Profile', new Schema({
+webProfiles.forEach(function (profile) {
+  webProfilesDef[profile] = Array;
+});
+
+var profileSchema = new Schema({
   userId: String,
   displayName: String,
   photoUrls: {
@@ -10,39 +20,11 @@ mongoose.model('Profile', new Schema({
   },
   wants: String,
   haves: String,
-  webProfiles: {
-    amazon: Array,
-    delicious: Array,
-    digg: Array,
-    doodle: Array,
-    dopplr: Array,
-    ebay: Array,
-    facebook: Array,
-    flickr: Array,
-    foursquare: Array,
-    github: Array,
-    'google+': Array,
-    homepage: Array,
-    last_fm: Array,
-    lifestream_fm: Array,
-    mindmeister: Array,
-    'mister wong': Array,
-    other: Array,
-    photobucket: Array,
-    plazes: Array,
-    qype: Array,
-    reddit: Array,
-    'second life': Array,
-    sevenload: Array,
-    slideshare: Array,
-    sourceforge: Array,
-    spreed: Array,
-    'stumble upon': Array,
-    twitter: Array,
-    vimeo: Array,
-    wikipedia: Array,
-    yelp: Array,
-    youtube: Array,
-    zoominfo: Array
-  }
-}));
+  webProfiles: webProfilesDef
+});
+
+profileSchema.statics.getLabelForWebProfile = function(webProfile) {
+  return webProfilesDef[webProfile];
+};
+
+mongoose.model('Profile', profileSchema);
