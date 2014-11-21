@@ -11,26 +11,28 @@ var mongoose = require('mongoose'),
 
 module.exports = function (io, eventEmitter) {
   var handleError = function (sess, error) {
-    var response = JSON.parse(error.data);
+    if (error.data) {
+      var response = JSON.parse(error.data);
 
-    if (error.statusCode === 401 && response.error_name === 'INVALID_OAUTH_TOKEN') {
-      console.log('updateProfile: Session '+sess._id+' is expired. Removing ..');
-      Profile.remove({_id: sess.session.user.id}).exec()
-        .then(function () {
-          io.emit('profiles:updated');
-        }, function (err) {
-          console.log('could not remove profile', err);
+      if (error.statusCode === 401 && response.error_name === 'INVALID_OAUTH_TOKEN') {
+        console.log('updateProfile: Session '+sess._id+' is expired. Removing ..');
+        Profile.remove({_id: sess.session.user.id}).exec()
+          .then(function () {
+            io.emit('profiles:updated');
+          }, function (err) {
+            console.log('could not remove profile', err);
+          });
+        sess.remove(function (err) {
+          if (err) {
+            console.log('could not remove session', err);
+          }
         });
-      sess.remove(function (err) {
-        if (err) {
-          console.log('could not remove session', err);
-        }
-      });
-    } else if (error.statusCode === 403 && response.error_name === 'RATE_LIMIT_EXCEEDED') {
-      console.log("Warning: The consumer key is currently throttled", error);
-    } else {
-      console.log('Unknown API error', error);
+      } else if (error.statusCode === 403 && response.error_name === 'RATE_LIMIT_EXCEEDED') {
+        console.log("Warning: The consumer key is currently throttled", error);
+      }
     }
+
+    console.log('Unknown API error', error);
   }
 
   eventEmitter.on('updateProfile', function (sess, wall_id) {
