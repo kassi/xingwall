@@ -11,7 +11,9 @@ var mongoose = require('mongoose'),
 
 module.exports = function (io, eventEmitter) {
   var handleError = function (sess, error) {
-    if (error.data) {
+    if (error.code == 'ECONNRESET') {
+      return; // ignore socket hang up error
+    } else if (error.data) {
       var response = JSON.parse(error.data);
 
       if (error.statusCode === 401 && response.error_name === 'INVALID_OAUTH_TOKEN') {
