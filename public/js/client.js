@@ -21,7 +21,7 @@ angular.module('xingwall', [])
       },
       controller: function ($scope, $window, Profile) {
         $scope.loadData = function (callback) {
-          Profile.all({wallId: $scope.wallId}).then(function (profiles) {
+          Profile.all({ wallId: $scope.wallId }).then(function (profiles) {
             $scope.profiles = profiles;
 
             if (callback) {
@@ -30,8 +30,8 @@ angular.module('xingwall', [])
           });
         };
 
-        $scope.setCurrentProfile = function(event, profile) {
-          if($scope.currentProfile) {
+        $scope.setCurrentProfile = function (event, profile) {
+          if ($scope.currentProfile) {
             $scope.currentProfile.isActive = false;
           }
 
@@ -42,10 +42,12 @@ angular.module('xingwall', [])
         };
 
         socket.on('profiles:updated', function (profile) {
-          $scope.loadData(function() {
-            if (!profile) { return;}
+          $scope.loadData(function () {
+            if (!profile) {
+              return;
+            }
 
-            $scope.profiles.filter(function(x, i) {
+            $scope.profiles.filter(function (x, i) {
               if (x.userId === profile.userId) {
                 $scope.profiles.splice(i, 1);
               }
@@ -61,8 +63,8 @@ angular.module('xingwall', [])
 
 // TODO: Remove from global scope
 // Source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffleArray (array) {
-  var currentIndex = array.length, temporaryValue, randomIndex ;
+function shuffleArray(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {

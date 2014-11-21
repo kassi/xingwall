@@ -1,6 +1,6 @@
 var Wall = require('mongoose').model('Wall');
 
-module.exports = function (app, io) {
+module.exports = function (app) {
   app.get('/walls/:wall_id', function (req, res) {
     var wall_id = req.params.wall_id;
     Wall.findById(wall_id, function (err, wall) {
