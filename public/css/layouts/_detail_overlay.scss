@@ -48,14 +48,14 @@ $_detail_width: 600px;
   .content-line {
     width: 95%;
     display: block;
-    font-size: $font-m;
-    line-height: $font-l;
-    margin: 0 auto $space;
+    font-size: $font-xl;
+    line-height: $font-xxl;
+    margin: 0 auto $space-quad;
 
     strong {
       font-weight: bold;
-      font-size: $font-l;
-      margin: 0 $space-half 0 0;
+      font-size: $font-xxl;
+      margin: 0 $space 0 0;
     }
 
     ul {
@@ -80,7 +80,7 @@ $_detail_width: 600px;
 
   .close {
     float: left;
-    position: absolute;
+    position: fixed;
     margin: 0 0 0 10px;
     font-size: $font-headline;
     color: $col-primary;

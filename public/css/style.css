@@ -123,13 +123,13 @@ body {
   .wall-details .content-line {
     width: 95%;
     display: block;
-    font-size: 14px;
-    line-height: 18px;
-    margin: 0 auto 10px; }
+    font-size: 22.652px;
+    line-height: 29.124px;
+    margin: 0 auto 40px; }
     .wall-details .content-line strong {
       font-weight: bold;
-      font-size: 18px;
-      margin: 0 5px 0 0; }
+      font-size: 29.124px;
+      margin: 0 10px 0 0; }
     .wall-details .content-line ul {
       list-style-type: square;
       margin-left: 30px; }
@@ -143,7 +143,7 @@ body {
         color: #004c4e; }
   .wall-details .close {
     float: left;
-    position: absolute;
+    position: fixed;
     margin: 0 0 0 10px;
     font-size: 42px;
     color: #006567;
