@@ -94,12 +94,16 @@ body {
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   overflow: auto; }
+  .wall-details:after {
+    clear: both;
+    content: '';
+    display: block; }
   .wall-details.active {
     display: block; }
   .wall-details h1 {
     text-align: center;
     font-size: 42px;
-    margin: 20px 0 40px; }
+    margin: 40px 0; }
   .wall-details h2 {
     font-size: 22.652px;
     font-weight: bold;
@@ -109,7 +113,7 @@ body {
     margin: 40px auto;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
   .wall-details .content-line {
-    width: 90%;
+    width: 95%;
     display: block;
     font-size: 14px;
     line-height: 18px;
@@ -141,6 +145,14 @@ body {
     .wall-details .close:hover {
       color: #004c4e;
       font-size: 47px; }
+  .wall-details .col {
+    margin-top: 20px; }
+    .wall-details .col.photo {
+      float: left;
+      width: 340px; }
+    .wall-details .col.info {
+      overflow: hidden;
+      width: auto; }
 
 @media (max-width: 420px) {
   .wall-details .close {

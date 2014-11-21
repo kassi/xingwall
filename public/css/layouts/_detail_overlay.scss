@@ -14,6 +14,8 @@ $_detail_width: 600px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
   overflow: auto;
 
+  @include after-clear;
+
   &.active {
     display: block;
   }
@@ -21,7 +23,7 @@ $_detail_width: 600px;
   h1 {
     text-align: center;
     font-size: $font-headline;
-    margin: $space-double 0 $space-quad;
+    margin: $space-quad 0;
   }
 
   h2 {
@@ -37,7 +39,7 @@ $_detail_width: 600px;
   }
 
   .content-line {
-    width: 90%;
+    width: 95%;
     display: block;
     font-size: $font-m;
     line-height: $font-l;
@@ -82,6 +84,20 @@ $_detail_width: 600px;
     &:hover {
       color: $col-primary-shade;
       font-size: $font-headline + 5;
+    }
+  }
+
+  .col {
+    margin-top: $space-double;
+
+    &.photo {
+      float: left;
+      width: 340px;
+    }
+
+    &.info {
+      overflow: hidden;
+      width: auto;
     }
   }
 }
