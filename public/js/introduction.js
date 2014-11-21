@@ -1,7 +1,7 @@
 (function(exports) {
   $(function() {
     var MOUSE_WAIT_TIME = 6 * 1000;
-    var PRESENT_TIME = 4 * 1000;
+    var PRESENT_TIME = 6 * 1000;
 
     var $window = $(window),
       $document = $(document),
