@@ -39,7 +39,8 @@ module.exports = function (io, eventEmitter) {
 
   eventEmitter.on('updateProfile', function (sess, wall_id) {
     var client = xingApi.client(sess.session.user.oauthToken, sess.session.user.oauthTokenSecret);
-    client.get('/v1/users/me', function (error, response) {
+    var fields = 'display_name,wants,haves,web_profiles,photo_urls.size_128x128,photo_urls.size_256x256';
+    client.get('/v1/users/me?fields='+fields, function (error, response) {
       if (error) { return handleError(sess, error); }
 
       var user = JSON.parse(response).users[0];
@@ -47,13 +48,13 @@ module.exports = function (io, eventEmitter) {
       var profile = new Profile({
         userId: user.id,
           displayName: user.display_name,
+          wants: user.wants,
+          haves: user.haves,
+          webProfiles: user.web_profiles,
           photoUrls: {
             size_128x128: user.photo_urls.size_128x128,
             size_256x256: user.photo_urls.size_256x256
-          },
-          wants: user.wants,
-          haves: user.haves,
-          webProfiles: user.web_profiles
+          }
       }).toObject();
 
       delete profile._id; // make sure that we don't overwrite the internal _id on an update
