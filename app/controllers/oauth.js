@@ -1,8 +1,8 @@
-var XINGApi        = require('xing-api'),
-    mongoose       = require('mongoose'),
-    Wall           = mongoose.model('Wall'),
-    Profile        = mongoose.model('Profile'),
-    xingApi        = new XINGApi({
+var XINGApi  = require('xing-api'),
+    mongoose = require('mongoose'),
+    Wall     = mongoose.model('Wall'),
+    Profile  = mongoose.model('Profile'),
+    xingApi  = new XINGApi({
       consumerKey: process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
       oauthCallback: process.env.OAUTH_CALLBACK
@@ -28,7 +28,7 @@ module.exports = function (app, io) {
 
   app.get('/walls/:wall_id/disconnect', function (req, res) {
     Profile
-      .remove({_id: req.session.user.id})
+      .remove({ _id: req.session.user.id })
       .exec()
       .then(function (succ) {
         io.emit('profiles:updated', null);
@@ -38,7 +38,7 @@ module.exports = function (app, io) {
 
     req.session.user = null;
 
-    res.render('oauth/logout',  {url: "/walls/" + req.params.wall_id + "/connect"});
+    res.render('oauth/logout', { url: "/walls/" + req.params.wall_id + "/connect" });
   });
 
   app.get('/oauth_callback', function (req, res) {

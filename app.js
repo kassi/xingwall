@@ -2,11 +2,11 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   require('dotenv').load();
 }
 
-var app      = require('express')(),
-    mongoose = require('mongoose'),
-    http     = require('http').Server(app),
-    io       = require('socket.io')(http),
-    events   = require('events'),
+var app          = require('express')(),
+    mongoose     = require('mongoose'),
+    http         = require('http').Server(app),
+    io           = require('socket.io')(http),
+    events       = require('events'),
     eventEmitter = new events.EventEmitter();
 
 mongoose.connect(process.env.MONGOHQ_URL);
@@ -23,7 +23,7 @@ eventEmitter.on('tokenCheck', function () {
   // check every 5 minutes if the session is still active
   var cutoff = new Date(Date.now() - 5 * 60 * 1000);
   Session
-    .find({"session.lastActive": {$lt: cutoff}})
+    .find({ "session.lastActive": { $lt: cutoff } })
     .exec()
     .then(function (sessions) {
       var now = new Date();

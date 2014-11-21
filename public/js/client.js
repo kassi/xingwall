@@ -1,6 +1,31 @@
 angular.module('xingwall', [])
 
   .service('Profile', function ($q) {
+    var webProfiles = {
+      amazon: 'Amazon',
+      delicious: 'Delicious',
+      digg: 'Digg',
+      doodle: 'Doodle',
+      ebay: 'eBay',
+      facebook: 'Facebook',
+      flickr: 'Flickr',
+      foursquare: 'Foursquare',
+      github: 'GitHub',
+      'google+': 'Google+',
+      homepage: 'Website',
+      last_fm: 'Last.fm',
+      other: 'Other',
+      photobucket: 'Photobucket',
+      reddit: 'Reddit',
+      slideshare: 'Slideshare',
+      'stumble upon': 'Stumble upon',
+      twitter: 'Twitter',
+      vimeo: 'Vimeo',
+      wikipedia: 'Wikipedia',
+      yelp: 'Yelp',
+      youtube: 'YouTube'
+    };
+
     this.all = function (opts) {
       var deferred = $q.defer();
       socket.emit('profiles:all', opts);
@@ -10,6 +35,10 @@ angular.module('xingwall', [])
       });
 
       return deferred.promise;
+    };
+
+    this.labelForWebProfile = function (webProfile) {
+      return webProfiles[webProfile];
     }
   })
 
@@ -21,7 +50,7 @@ angular.module('xingwall', [])
       },
       controller: function ($scope, $window, Profile) {
         $scope.loadData = function (callback) {
-          Profile.all({wallId: $scope.wallId}).then(function (profiles) {
+          Profile.all({ wallId: $scope.wallId }).then(function (profiles) {
             $scope.profiles = profiles;
 
             if (callback) {
@@ -46,8 +75,8 @@ angular.module('xingwall', [])
           }, timeout);
         }
 
-        $scope.setCurrentProfile = function(event, profile) {
-          if($scope.currentProfile) {
+        $scope.setCurrentProfile = function (event, profile) {
+          if ($scope.currentProfile) {
             $scope.currentProfile.isActive = false;
           }
 
@@ -59,11 +88,15 @@ angular.module('xingwall', [])
           event.preventDefault();
         };
 
-        socket.on('profiles:updated', function (profile) {
-          $scope.loadData(function() {
-            if (!profile) { return;}
+        $scope.labelForWebProfile = Profile.labelForWebProfile;
 
-            $scope.profiles.filter(function(x, i) {
+        socket.on('profiles:updated', function (profile) {
+          $scope.loadData(function () {
+            if (!profile) {
+              return;
+            }
+
+            $scope.profiles.filter(function (x, i) {
               if (x.userId === profile.userId) {
                 $scope.profiles.splice(i, 1);
               }
@@ -79,8 +112,8 @@ angular.module('xingwall', [])
 
 // TODO: Remove from global scope
 // Source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffleArray (array) {
-  var currentIndex = array.length, temporaryValue, randomIndex ;
+function shuffleArray(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {

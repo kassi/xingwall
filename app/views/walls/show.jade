@@ -36,74 +36,13 @@ block content
           strong Haves
           = "{{displayProfile.haves}}"
 
-        //h2 Web Profiles
 
-        .content-line(ng-if="displayProfile.webProfiles.homepage.length")
-          strong Homepage
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.homepage')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.facebook.length")
-          strong Facebook
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.facebook')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.twitter.length")
-          strong Twitter
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.twitter')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles['google+'].length")
-          strong Google+
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles["google+"]')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.amazon.length")
-          strong Amazon
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.amazon')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.ebay.length")
-          strong Ebay
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.ebay')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.youtube.length")
-          strong YouTube
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.youtube')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.yelp.length")
-          strong Yelp
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.yelp')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.reddit.length")
-          strong Reddit
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.reddit')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.foursquare.length")
-          strong Foursquare
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.foursquare')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
-        .content-line(ng-if="displayProfile.webProfiles.flickr.length")
-          strong Flickr
-          ul
-            li(ng-repeat='link in displayProfile.webProfiles.flickr')
-              a(href="{{link}}" target="_blank")= "{{link}}"
-
+        div(ng-repeat='(webProfile, values) in displayProfile.webProfiles')
+          .content-line(ng-if="values.length > 0")
+            strong {{ labelForWebProfile(webProfile) }}
+            ul
+              li(ng-repeat='link in values')
+                a(href="{{link}}" target="_blank")= "{{link}}"
 
     .wall
       .wall-content
