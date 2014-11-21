@@ -4,6 +4,11 @@ var mongoose = require('mongoose'),
 mongoose.model('Session', new Schema({
   _id: String,
   session: {
-    lastActive: Date
-  }
+    lastActive: Date,
+    user: {
+      id: { type: Schema.Types.ObjectId, ref: 'Profile' },
+      oauthToken: String,
+      oauthTokenSecret: String
+    }
+  },
 }));

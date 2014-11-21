@@ -2,13 +2,14 @@ var XINGApi  = require('xing-api'),
     mongoose = require('mongoose'),
     Wall     = mongoose.model('Wall'),
     Profile  = mongoose.model('Profile'),
+    Session  = mongoose.model('Session'),
     xingApi  = new XINGApi({
-      consumerKey: process.env.XING_CONSUMER_KEY,
+      consumerKey:    process.env.XING_CONSUMER_KEY,
       consumerSecret: process.env.XING_CONSUMER_SECRET,
-      oauthCallback: process.env.OAUTH_CALLBACK
+      oauthCallback:  process.env.OAUTH_CALLBACK
     });
 
-module.exports = function (app, io) {
+module.exports = function (app, io, eventEmitter) {
   app.get('/walls/:wall_id/connect', function (req, res) {
     // XXX ugly hack
     var existingAuthorizeCallback = xingApi.oauth._authorize_callback;
@@ -50,62 +51,28 @@ module.exports = function (app, io) {
 
     xingApi.getAccessToken(requestToken.token, requestToken.secret, req.query.oauth_verifier,
       function (error, oauthToken, oauthTokenSecret) {
+        res.cookie('requestToken', null); // delete cookie
+
         if (error) {
-          console.log(error);
           res.render('error');
           return;
         }
+
         req.session.regenerate(function (err) {
-          res.cookie('requestToken', null); // delete cookie
+          req.session.user = {
+            oauthToken: oauthToken,
+            oauthTokenSecret: oauthTokenSecret
+          }
+          req.session.save();
 
-          var client = xingApi.client(oauthToken, oauthTokenSecret);
+          // The updateProfile event needs to have a mongoose instance of the session.
+          // `req.session` is not the same.
+          Session.findOne({_id: req.sessionID}).exec()
+            .then(function (session) {
+              eventEmitter.emit('updateProfile', session, req.query.wall_id);
+            });
 
-          client.get('/v1/users/me', function (error, response) {
-            var user = JSON.parse(response).users[0];
-
-            Wall.findOne({ _id: req.query.wall_id }).exec()
-              .then(function (wall) {
-
-                var profile = new Profile({
-                  userId: user.id,
-                  displayName: user.display_name,
-                  photoUrls: {
-                    size_128x128: user.photo_urls.size_128x128,
-                    size_256x256: user.photo_urls.size_256x256
-                  },
-                  wants: user.wants,
-                  haves: user.haves,
-                  webProfiles: user.web_profiles
-                }).toObject();
-
-                delete profile._id; // make sure that we don't overwrite the internal _id on an update
-
-                Profile.findOneAndUpdate({ userId: user.id }, profile, { upsert: true }).exec()
-                  .then(function (profile) {
-                    wall.profiles.pull(profile._id);
-                    wall.profiles.push(profile._id);
-
-                    wall.save(function (err) {
-                      if (err) {
-                        console.error(err);
-                        res.render('error');
-                      } else {
-                        req.session.lastActive = new Date();
-                        req.session.user = {
-                          id: profile._id,
-                          oauthToken: oauthToken,
-                          oauthTokenSecret: oauthTokenSecret
-                        };
-
-                        io.emit('profiles:updated', profile);
-                        res.render('oauth/callback', { url: "/walls/" + req.query.wall_id, wall: wall });
-                      }
-                    });
-                  });
-              }, function (err) {
-                console.log(err);
-              });
-          });
+          res.render('oauth/callback', { url: "/walls/" + req.query.wall_id, wall_id: req.query.wall_id });
         });
       });
   });
