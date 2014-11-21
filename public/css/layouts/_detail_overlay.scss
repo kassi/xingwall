@@ -3,7 +3,6 @@ $_detail_offset_y: 10%;
 $_detail_width: 600px;
 
 .wall-details {
-  display: none;
   position: absolute;
   top: $_detail_offset_y;
   bottom: $_detail_offset_y;
@@ -15,10 +14,7 @@ $_detail_width: 600px;
   overflow: auto;
 
   @include after-clear;
-
-  &.active {
-    display: block;
-  }
+  @include opacity-toggle;
 
   h1 {
     text-align: center;
@@ -102,6 +98,18 @@ $_detail_width: 600px;
       width: auto;
     }
   }
+}
+
+
+#overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99;
+  @include opacity-toggle;
 }
 
 @include breakpoint(mobile) {

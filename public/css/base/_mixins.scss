@@ -14,3 +14,14 @@
     display: block;
   }
 }
+
+@mixin opacity-toggle {
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

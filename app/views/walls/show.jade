@@ -23,20 +23,21 @@ block content
       a.close(href="#" ng-click='setCurrentProfile($event, false)') &times;
 
       .col.photo
-        img.profile-photo(ng-src="{{currentProfile.photoUrls.size_256x256}}")
+        img.profile-photo(ng-src="{{currentProfilePhotoUrl}}")
 
       .col.info
-        h1= "{{currentProfile.displayName}}"
+        h1= "{{displayProfile.displayName}}"
 
-        p.content-line(ng-if="currentProfile.wants")
+        p.content-line(ng-if="displayProfile.wants")
           strong Wants
-          = "{{currentProfile.wants}}"
+          = "{{displayProfile.wants}}"
 
-        p.content-line(ng-if="currentProfile.haves")
+        p.content-line(ng-if="displayProfile.haves")
           strong Haves
-          = "{{currentProfile.haves}}"
+          = "{{displayProfile.haves}}"
 
-        div(ng-repeat='(webProfile, values) in currentProfile.webProfiles')
+
+        div(ng-repeat='(webProfile, values) in displayProfile.webProfiles')
           .content-line(ng-if="values.length > 0")
             strong {{ labelForWebProfile(webProfile) }}
             ul

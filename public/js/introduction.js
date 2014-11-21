@@ -1,12 +1,10 @@
 (function(exports) {
   $(function() {
     var MOUSE_WAIT_TIME = 6 * 1000;
-    var PRESENT_TIME = 4 * 1000;
+    var PRESENT_TIME = 6 * 1000;
 
     var $window = $(window),
       $document = $(document),
-      $detail   = $('.wall-details'),
-      $close    = $detail.find('.close'),
       $switch   = $('.intro-switch'),
       stopped   = false,
       timer;
@@ -14,6 +12,10 @@
     var intro = {
       getProfiles: function () {
         return $('.wall-profile-entry');
+      },
+
+      getDetail: function () {
+        return $('.wall-details');
       },
 
       randomProfile: function () {
@@ -25,13 +27,12 @@
         clearTimeout(timer);
 
         var $random = this.randomProfile();
-        $random.addClass('active');
         $random.trigger('click');
         timer = setTimeout(this.close.bind(this), PRESENT_TIME);
       },
 
       close: function () {
-        $close.trigger('click');
+        this.getDetail().find('.close').trigger('click');
         $window.trigger('mousemove');
       },
 
@@ -47,7 +48,7 @@
       resume: function () {
         clearTimeout(timer);
 
-        if ($detail.is(':visible')) {
+        if (this.getDetail().hasClass('active')) {
           timer = setTimeout(intro.close.bind(this), PRESENT_TIME);
         } else {
           timer = setTimeout(intro.introduce.bind(this), MOUSE_WAIT_TIME);
