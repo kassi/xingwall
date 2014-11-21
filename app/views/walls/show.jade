@@ -43,7 +43,7 @@ block content
               li(ng-repeat='link in values')
                 a(href="{{link}}" target="_blank")= "{{link}}"
 
-    .wall
+    .wall(grid)
       .wall-content
         section.wall-profiles
           ul
@@ -53,7 +53,6 @@ block content
 
 
 block footer_js
-  script(src='/js/grid.js')
   script(src='/js/client.js')
   script(src='/js/qr.js')
   script(src='/js/introduction.js')

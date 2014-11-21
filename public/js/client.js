@@ -26,6 +26,25 @@ angular.module('xingwall', [])
       youtube: 'YouTube'
     };
 
+    // Source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    function shuffleArray(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
     this.all = function (opts) {
       var deferred = $q.defer();
       socket.emit('profiles:all', opts);
@@ -90,24 +109,33 @@ angular.module('xingwall', [])
       }
     }
   })
+
+  .directive('grid', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, elm) {
+        var GRID_SIZE = 130; // 128px img + 2px of borders
+
+        var $window = angular.element(window),
+            $wall = elm;
+
+        function resizeWall() {
+          var winWidth = $window.outerWidth(),
+              wallWidth = $wall.outerWidth(),
+              columns = Math.floor(wallWidth / GRID_SIZE),
+              newWallWidth = columns * GRID_SIZE,
+              newOffset = (winWidth - newWallWidth) / 2;
+
+          $wall.css({
+            left: newOffset,
+            right: newOffset,
+            top: newOffset,
+            bottom: newOffset
+          });
+        }
+
+        resizeWall();
+      }
+    }
+  })
 ;
-
-// TODO: Remove from global scope
-// Source: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffleArray(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
