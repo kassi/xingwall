@@ -11,7 +11,7 @@ var express        = require('express'),
     session        = require('express-session'),
     MongoStore     = require('connect-mongo')(session);
 
-module.exports = function (app, io, eventEmitter) {
+module.exports = function (app, io, eventEmitter, xingApi) {
   app.set('views', root + '/app/views');
   app.set('view engine', 'jade');
 
@@ -43,12 +43,12 @@ module.exports = function (app, io, eventEmitter) {
 
   var controllers = glob.sync(root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
-    require(controller)(app, io, eventEmitter);
+    require(controller)(app, io, eventEmitter, xingApi);
   });
 
   var processors = glob.sync(root + '/app/processors/*.js');
   processors.forEach(function (processor) {
-    require(processor)(io, eventEmitter);
+    require(processor)(io, eventEmitter, xingApi);
   });
 
   app.use(function (req, res, next) {

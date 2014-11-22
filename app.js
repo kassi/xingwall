@@ -6,7 +6,13 @@ var app      = require('express')(),
     mongoose = require('mongoose'),
     http     = require('http').Server(app),
     io       = require('socket.io')(http),
-    events   = require('events');
+    events   = require('events'),
+    XINGApi  = require('xing-api'),
+    xingApi  = new XINGApi({
+      consumerKey:    process.env.XING_CONSUMER_KEY,
+      consumerSecret: process.env.XING_CONSUMER_SECRET,
+      oauthCallback:  process.env.OAUTH_CALLBACK
+    });
 
 mongoose.connect(process.env.MONGOHQ_URL);
 var db = mongoose.connection;
@@ -16,7 +22,7 @@ db.on('error', function () {
 
 var eventEmitter = new events.EventEmitter();
 
-require('./config/express')(app, io, eventEmitter);
+require('./config/express')(app, io, eventEmitter, xingApi);
 
 var seconds = 1000;
 var minutes = 60 * seconds;

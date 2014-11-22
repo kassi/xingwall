@@ -1,13 +1,7 @@
 var mongoose = require('mongoose'),
     Session  = mongoose.model('Session'),
     Profile  = mongoose.model('Profile'),
-    Wall     = mongoose.model('Wall'),
-    XINGApi  = require('xing-api'),
-    xingApi  = new XINGApi({
-      consumerKey:    process.env.XING_CONSUMER_KEY,
-      consumerSecret: process.env.XING_CONSUMER_SECRET,
-      oauthCallback:  process.env.OAUTH_CALLBACK
-    });
+    Wall     = mongoose.model('Wall');
 
 module.exports = function (io, eventEmitter) {
   var handleError = function (sess, error) {

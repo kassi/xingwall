@@ -1,15 +1,9 @@
-var XINGApi  = require('xing-api'),
-    mongoose = require('mongoose'),
+var mongoose = require('mongoose'),
     Wall     = mongoose.model('Wall'),
     Profile  = mongoose.model('Profile'),
-    Session  = mongoose.model('Session'),
-    xingApi  = new XINGApi({
-      consumerKey:    process.env.XING_CONSUMER_KEY,
-      consumerSecret: process.env.XING_CONSUMER_SECRET,
-      oauthCallback:  process.env.OAUTH_CALLBACK
-    });
+    Session  = mongoose.model('Session');
 
-module.exports = function (app, io, eventEmitter) {
+module.exports = function (app, io, eventEmitter, xingApi) {
   app.get('/walls/:wall_id/connect', function (req, res) {
     // XXX ugly hack
     var existingAuthorizeCallback = xingApi.oauth._authorize_callback;
