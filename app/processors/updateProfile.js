@@ -3,39 +3,48 @@ var mongoose = require('mongoose'),
     Profile  = mongoose.model('Profile'),
     Wall     = mongoose.model('Wall');
 
-module.exports = function (io, eventEmitter) {
-  var handleError = function (sess, error) {
-    if (error.code == 'ECONNRESET') {
-      return; // ignore socket hang up error
-    } else if (error.data) {
-      var response = JSON.parse(error.data);
-
-      if (error.statusCode === 401 && response.error_name === 'INVALID_OAUTH_TOKEN') {
-        console.log('updateProfile: Session '+sess._id+' is expired. Removing ..');
-        Profile.remove({_id: sess.session.user.id}).exec()
-          .then(function () {
-            io.emit('profiles:updated');
-          }, function (err) {
-            console.log('could not remove profile', err);
-          });
-        sess.remove(function (err) {
-          if (err) {
-            console.log('could not remove session', err);
-          }
-        });
-      } else if (error.statusCode === 403 && response.error_name === 'RATE_LIMIT_EXCEEDED') {
-        console.log("Warning: The consumer key is currently throttled", error);
-      }
-    }
-
-    console.log('Unknown API error', error);
-  }
+module.exports = function (io, eventEmitter, xingApi) {
+  var fields = [
+    'display_name',
+    'wants',
+    'haves',
+    'web_profiles',
+    'photo_urls.size_128x128',
+    'photo_urls.size_256x256'
+  ].join();
 
   eventEmitter.on('updateProfile', function (sess, wall_id) {
+    eventEmitter.emit('updateProfile:started', sess, wall_id);
     var client = xingApi.client(sess.session.user.oauthToken, sess.session.user.oauthTokenSecret);
-    var fields = 'display_name,wants,haves,web_profiles,photo_urls.size_128x128,photo_urls.size_256x256';
+
     client.get('/v1/users/me?fields='+fields, function (error, response) {
-      if (error) { return handleError(sess, error); }
+      if (error) {
+        if (error.code == 'ECONNRESET') {
+          return; // ignore socket hang up error
+        } else if (error.data) {
+          var response = JSON.parse(error.data);
+
+          if (error.statusCode === 401 && response.error_name === 'INVALID_OAUTH_TOKEN') {
+            console.log('updateProfile: Session '+sess._id+' is expired. Removing ..');
+            Profile.remove({_id: sess.session.user.id}).exec()
+              .then(function () {
+                io.emit('profiles:updated');
+              }, function (err) {
+                console.log('could not remove profile', err);
+              });
+            sess.remove(function (err) {
+              if (err) {
+                console.log('could not remove session', err);
+              }
+            });
+          } else if (error.statusCode === 403 && response.error_name === 'RATE_LIMIT_EXCEEDED') {
+            console.log("Warning: The consumer key is currently throttled", error);
+          }
+        }
+
+        console.log('Unknown API error', error);
+        return;
+      }
 
       var user = JSON.parse(response).users[0];
 
